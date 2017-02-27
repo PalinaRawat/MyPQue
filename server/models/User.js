@@ -7,6 +7,12 @@ const userSchema = mongoose.Schema({
     local            : {
         email        : String,
         password     : String
+    },
+    profile : {
+    	hasProf				: Boolean,
+    	LookingFor			: String,
+    	CompanyName			: String,
+    	CompanyDescription  : String
     }
 });
 

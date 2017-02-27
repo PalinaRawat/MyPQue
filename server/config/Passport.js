@@ -38,6 +38,7 @@ module.exports = (passport) => {
 
 					user.local.email = req.body.email;
 					user.local.password = user.generateHash(password);
+					user.profile.hasProf = false;
 
 					//save the user
 					user.save((err) => {

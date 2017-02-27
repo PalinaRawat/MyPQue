@@ -1,0 +1,145 @@
+
+<!doctype html>
+<html>
+<head>
+    <title>Sign Up  - Student</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type="text/css">
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #1a1a00;
+        color: #cccccc;
+
+    }
+
+
+
+    .heading {
+        margin: 1em 0 0.5em 0;
+        color: #cccccc;
+        font-weight: normal;
+        font-family: 'Ultra', sans-serif;   
+        font-size: 36px;
+        line-height: 42px;
+        text-transform: uppercase;
+        text-shadow: 0 2px white, 0 3px #777;
+        text-align: center;
+
+    }
+
+    hr.topHorizontalRule     { 
+      height: 30px; 
+      border-style: solid; 
+      border-color: #8c8b8b; 
+      border-width: 1px 0 0 0; 
+      border-radius: 20px; 
+  } 
+
+
+
+
+  a:hover {
+    font-size: 50px;
+}
+
+
+</style>    
+</head>
+
+<body>
+    <h1 class="heading">Student Profile</h3>
+        <br>
+        <hr class="topHorizontalRule">
+        <div id="wrapper">
+
+            <form>
+                <label>
+                    <span>First Name :</span>
+                    <input  type="text"  placeholder="First Name" />
+                </label>
+
+                <br>
+                <br>
+
+                <label>
+                    <span>Last Name :</span>
+                    <input  type="text"  placeholder="Last Name" />
+                </label>
+
+                <br>
+                <br>
+
+                <label>
+                    <span>Major :</span>
+                    <input  type="text"  placeholder="Major" />
+                </label>
+                <br><br>
+                <label>
+                    <span>DOB :</span>
+                    <select name="month" placeholder="Month">
+                        <option value="" disabled selected>Month</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>      
+
+                    </select>      
+                    <input type="text"  placeholder="Date" />
+                    <input type="text"  placeholder="Year" />
+                </label>
+                <br><br>
+
+                <label>
+                    <span>Class Standing :</span> <br>
+
+                    <input type="radio" name="class_standing" value="Freshman"> Freshman<br>
+                    <input type="radio" name="class_standing" value="Sophomore"> Sophomore<br>
+                    <input type="radio" name="class_standing" value="Junior"> Junior<br>
+                    <input type="radio" name="class_standing" value="Senior"> Senior<br>
+                </label>
+
+                <br>
+                <label>
+                  <span>Graduation Year :</span>
+                  <input type="text"  placeholder="Graduation Year" />
+              </label>
+              <br><br>
+              <label>
+                  <span>Opportunity type :</span> <br>
+
+                  <input type="radio" name="opportunity_type" value="Internship"> Internship<br>
+                  <input type="radio" name="opportunity_type" value="Full-time"> Full-time<br>
+              </label>
+              <br>
+
+              <label>
+                <span>Would you require sponsprhip now or in the future?</span><br>
+                <input type="radio" name="sponsoprhip" value="Yes"> Yes<br>
+                <input type="radio" name="sponsoprhip" value="No"> No<br>
+            </label>
+            <br>
+            <label>
+                <span>Please provde a link to your resume :</span>
+                <input  type="text"  placeholder="link to resume" />
+
+            </label>
+
+        </form>
+    </div>
+
+
+
+</body>
+</html>

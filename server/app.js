@@ -34,6 +34,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+//serve static files
+app.use(express.static('login/build'));
+
 //setup routes
 require('./routes/routes') (app, passport);
 app.listen(port, () => {

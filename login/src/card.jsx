@@ -46,11 +46,10 @@ class Signup extends Component {
 		        	<div className="form-group">
 		            	<input type="password" placeholder="Password" name="password"/>
 		        	</div>
+		        	<MuiThemeProvider>
+     			 	<RaisedButton type="submit" label="Sign up" primary={true} style={style} />
+    				</MuiThemeProvider> 
 		    	</form>
-
-		    	<MuiThemeProvider>
-     			 <RaisedButton label="Sign up" primary={true} style={style} />
-    			</MuiThemeProvider> 
 			</div>
 		);
 	}
@@ -68,11 +67,10 @@ class Login extends Component {
 			        <div class="form-group">
 			            <input placeholder="Password" type="password" name="password"/>
 			        </div>
+			        <MuiThemeProvider>
+     			 	<RaisedButton type="submit" label="Login" primary={true} style={style} />
+    				</MuiThemeProvider> 
 		    	</form>
-
-		    	 <MuiThemeProvider>
-     			 <RaisedButton label="Login" primary={true} style={style} />
-    			</MuiThemeProvider> 
 	    	</div>
 		);
 	}

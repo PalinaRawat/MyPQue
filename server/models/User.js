@@ -12,9 +12,12 @@ const userSchema = mongoose.Schema({
     },
     profile : {
     	hasProf				: Boolean,
-    	LookingFor			: String,
-    	CompanyName			: String,
-    	CompanyDescription  : String
+    	standing			: String,
+        major               : String,
+        gradYear            : String,
+        opType              : String,
+        sponsorship         : Boolean,
+        resume              : String,
     }
 });
 

@@ -25,37 +25,37 @@ module.exports = (app, passport) => {
 		res.sendFile(path.join(__dirname+'/../public/login/index.html'));
 	});
 
-	app.get('/main', isLoggedIn, (req, res)=> {
-		res.send('main app goes here\n');
+	app.get('/main', isLoggedIn, hasProfile, (req, res)=> {
+		res.send('logged in succesful as '+req.user.local.firstName);
+	});
+
+	app.get('/student', isLoggedIn, (req, res) => {
+		res.sendFile(path.join(__dirname+'/../public/frontend_login/index.html'));
 	});
 
 	app.post('/StudentProfile', isLoggedIn, (req, res) => {
-
-		User.findById(req.user.id, (err, user) => {
+		User.findOne({'local.email': req.user.local.email}, (err, user) => {
 			if(err)
 				res.send(err);
-			if(!user.profile.hasProf) {
-				//update company profile
-				user.profile.LookingFor = req.body.LookingFor;
-				user.profile.CompanyName = req.body.CompanyName;
-				user.profile.CompanyDescription = req.body.CompanyDescription;
+			//update company profile
+			user.profile.standing = req.body.standing;
+			user.profile.major = req.body.major;
+			user.profile.gradYear = req.body.gradYear;
+			user.profile.opType = req.body.opType;
 
-				user.save((err) => {
-					if(err)
-						res.send(err);
-					res.redirect('main');
-				})
-			}
+			if(req.body.sponsorship === "Yes")
+				user.profile.sponsorship = true;
+			else
+				user.profile.sponsorship = false;
 
-		});
-	});
+			user.profile.resume = req.body.resume;
+			user.profile.hasProf = true;
 
-	app.get('/StudentHasProfile/:student_email', isLoggedIn, (req, res) => {
-		User.findOne({'local.email': email}, (err, user) => {
-			if(err)
-				res.send(err);
-			if(user)
-				res.json(user.profile);
+			user.save((err) => {
+				if(err)
+					res.send(err);
+				res.redirect('/main');
+			});
 		});
 	});
 
@@ -68,5 +68,14 @@ module.exports = (app, passport) => {
 		if(req.isAuthenticated())
 			return next();
 		res.redirect('/login');
+	};
+	function hasProfile(req, res, next) {
+		User.findOne({'local.email': req.user.local.email}, (err, user) => {
+			if(err)
+				res.send(err);
+			if(user.profile.hasProf)
+				return next();
+			res.redirect('/student');
+		});
 	};
 }

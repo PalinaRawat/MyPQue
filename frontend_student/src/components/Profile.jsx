@@ -30,23 +30,23 @@ export default class Profile extends Component {
 
        <div className = "Profile">
        
-     <Form>
+     <form action="/StudentProfile" method="post">
 
       
          <div className="mui--text-center">Student Profile</div>
          
         <div className="mui--text-left">First Name</div>
-        <Input hint="First Name" />
+        <Input hint="First Name" name="firstName"/>
         
 
         <div className="mui--text-left">Last Name</div>
-        <Input hint="Last Name" />
+        <Input hint="Last Name" name="lastName"/>
 
         <div className="mui--text-left">Major</div>
-        <Input hint="Major" />
+        <Input hint="Major" name="major" />
 
         <div className="mui--text-left">Class Standing</div>
-        <Select defaultValue="option-2">
+        <Select defaultValue="option-2" name="standing">
           <Option value="Freshman" label="Freshman" />
           <Option value="Sophomore" label="Sophomore" />
            <Option value="Junior" label="Junior" />
@@ -54,34 +54,31 @@ export default class Profile extends Component {
         </Select>
 
          <div className="mui--text-left">Graduation Year</div>
-         <Input hint="Graduation Year" />
+         <Input hint="Graduation Year" name="gradYear"/>
 
 
 
         <div className="mui--text-left">Opportunity type</div>
-        <Select defaultValue="option-2">
+        <Select defaultValue="option-2" name="opType">
           <Option value="Internship" label="Internship" />
           <Option value="Full-time" label="Full-time" />
         </Select>
 
 
-        <div className="mui--text-left">Would you require sponsorhip now or in the future?</div>
-        <Select defaultValue="option-2">
+        <div className="mui--text-left">Would you require sponsorship now or in the future?</div>
+        <Select defaultValue="option-2" name="sponsorship">
           <Option value="Yes" label="Yes" />
           <Option value="No" label="No" />
         </Select>
 
         <div className="mui--text-left">Please provde a link to your resume: </div>
-        <Input hint="link to resume" />
+        <Input hint="link to resume" name="resume"/>
        
+      <MuiThemeProvider>
+        <RaisedButton label="Submit" type="submit" primary={true} style={style} />
+      </MuiThemeProvider> 
 
-
-      </Form>
-
-       <MuiThemeProvider>
-      <RaisedButton label="Submit" primary={true} style={style} />
-    </MuiThemeProvider> 
-
+    </form>
        </div>
 
     );

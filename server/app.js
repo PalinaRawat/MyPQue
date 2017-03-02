@@ -39,6 +39,7 @@ require('./routes/routes') (app, passport);
 
 //serving static files
 app.use(express.static('public/login'));
+app.use(express.static('public/frontend_login'));
 
 app.listen(port, () => {
 	console.log('Example app listening on port '+port);

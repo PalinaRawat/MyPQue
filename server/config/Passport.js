@@ -36,6 +36,8 @@ module.exports = (passport) => {
 				else {
 					var user = new User();
 
+					user.local.firstName = req.body.firstName;
+					user.local.lastName = req.body.lastName;
 					user.local.email = req.body.email;
 					user.local.password = user.generateHash(password);
 					user.profile.hasProf = false;

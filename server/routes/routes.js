@@ -22,7 +22,7 @@ module.exports = (app, passport) => {
 	}));
 
 	app.get('/login', (req, res) => {
-		res.sendFile(path.join(__dirname+'/../../login/build/index.html'));
+		res.sendFile(path.join(__dirname+'/../public/login/index.html'));
 	});
 
 	app.get('/main', isLoggedIn, (req, res)=> {
@@ -59,7 +59,7 @@ module.exports = (app, passport) => {
 		});
 	});
 
-	app.post('/logout', (req, res) => {
+	app.get('/logout', (req, res) => {
 		req.logout();
 		res.redirect('/');
 	});

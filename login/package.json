@@ -13,7 +13,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && mv build/ login/ && mv login/ ../server/public/",
+    "build": "react-scripts build && rm -rf ../server/public/login && mv build/ login/ && mv login/ ../server/public/",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }

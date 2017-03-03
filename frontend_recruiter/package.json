@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && rm -rf ../server/public/front-end/ && mv build/ front-end/ && mv front-end/ ../server/public",
+    "build": "react-scripts build && rm -rf ../server/public/frontend_recruiter/ && mv build/ frontend_recruiter/ && mv frontend_recruiter/ ../server/public",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }

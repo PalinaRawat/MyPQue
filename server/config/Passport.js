@@ -40,6 +40,7 @@ module.exports = (passport) => {
 					user.local.lastName = req.body.lastName;
 					user.local.email = req.body.email;
 					user.local.password = user.generateHash(password);
+					user.Recruiter.isRec = false;
 					user.profile.hasProf = false;
 
 					//save the user
@@ -59,7 +60,6 @@ module.exports = (passport) => {
         passReqToCallback : true 
     },
     (req, email, password, done) => {
-
         User.findOne({ 'local.email' :  email }, (err, user) => {
             if (err)
                 return done(err);
@@ -73,4 +73,59 @@ module.exports = (passport) => {
             return done(null, user);
         });
     }));
+
+    passport.use('rec-login', new LocalStrategy({
+        usernameField : 'companyLogin',
+        passwordField : 'companyPassword',
+        passReqToCallback : true 
+    },
+    (req, login, password, done) => {
+        User.findOne({ 'Recruiter.companyLogin' :  login }, (err, user) => {
+            if (err)
+                return done(err);
+            if (!user)
+                return done(null, false, req.flash('loginMessage', 'No rec found.'));
+            if (!user.validCompanyPassword(password))
+                return done(null, false, req.flash('loginMessage', 'invalid password'));
+
+            return done(null, user);
+        });
+    }));
+
+    passport.use('rec-signup', new LocalStrategy ({
+		usernameField: 'companyLogin',
+		passwordField: 'companyPassword',
+		passReqToCallback: true
+	},
+
+	(req, login, password, done) => {
+
+		process.nextTick(()=> {
+			User.findOne({'Recruiter.companyLogin': login}, (err, rec) => {
+				//error with database
+				if(err) 
+					return done(err);
+				//email already exists
+				if(rec)
+					return done(null, false, req.flash('signupMessage', 'this login was already taken'));
+				//create a new user
+				else {
+					var user = new User();
+
+					user.Recruiter.companyName = req.body.companyName;
+					user.Recruiter.companyLogin = req.body.companyLogin;
+					user.Recruiter.companyPassword = user.generateHash(password);
+					user.Recruiter.isRec = true;
+					user.profile.hasProf = false;
+
+					//save the user
+					user.save((err) => {
+						if(err)
+							throw err;
+						return done(null, user);
+					});
+				}
+			});
+		});
+	}));
 }

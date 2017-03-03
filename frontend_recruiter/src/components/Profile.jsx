@@ -30,48 +30,44 @@ export default class Profile extends Component {
 
        <div className = "Profile">
        
-     <Form>
+     <form action ="/CompanyProfile" method="post">
+          <div className="mui--text-center">Company Profile</div>
+           
+          <div className="mui--text-left">Name</div>
+          <Input hint="Company name"/>
+          
 
-      
-         <div className="mui--text-center">Company Profile</div>
+          <div className="mui--text-left">Description</div>
+          <Textarea hint="Company Description" name="description"/>
+          
+
+          <div className="mui--text-left">Looking for</div>
+          <Select defaultValue="option-2" name="lookingFor">
+            <Option value="Internship" label="Internship" />
+            <Option value="Full-time" label="Full-time" />
+          </Select>
          
-        <div className="mui--text-left">Name</div>
-        <Input hint="Company name" />
-        
-
-        <div className="mui--text-left">Description</div>
-        <Textarea hint="Company Description"/>
-        
-
-        <div className="mui--text-left">Looking for</div>
-        <Select defaultValue="option-2">
-          <Option value="Internship" label="Internship" />
-          <Option value="Full-time" label="Full-time" />
-        </Select>
-       
-       <div className="mui--text-left">Hiring</div>
-        <Select defaultValue="option-2">
-          <Option value="Freshman" label="Freshman" />
-          <Option value="Sophomore" label="Sophomore" />
-           <Option value="Junior" label="Junior" />
-          <Option value="Senior" label="Senior" />
-        </Select>
+         <div className="mui--text-left">Hiring</div>
+          <Select defaultValue="option-2" name="hiring">
+            <Option value="Freshman" label="Freshman" />
+            <Option value="Sophomore" label="Sophomore" />
+             <Option value="Junior" label="Junior" />
+            <Option value="Senior" label="Senior" />
+          </Select>
 
 
-        <div className="mui--text-left">Sponsoring Visas ?</div>
-        <Select defaultValue="option-2">
-          <Option value="Yes" label="Yes" />
-          <Option value="No" label="No" />
-        </Select>
+          <div className="mui--text-left">Sponsoring Visas ?</div>
+          <Select defaultValue="option-2" name="sponsers">
+            <Option value="Yes" label="Yes" />
+            <Option value="No" label="No" />
+          </Select>
 
-        <div className="mui--text-left">Time per student</div>
-         <Input hint="Estimated" />
-
-      </Form>
-
-       <MuiThemeProvider>
-      <RaisedButton label="Submit" primary={true} style={style} />
-    </MuiThemeProvider> 
+          <div className="mui--text-left">Time per student</div>
+           <Input hint="Estimated" name="timePer"/>
+        <MuiThemeProvider>
+          <RaisedButton label="Submit" type="submit" primary={true} style={style} />
+        </MuiThemeProvider> 
+      </form>
 
        </div>
 

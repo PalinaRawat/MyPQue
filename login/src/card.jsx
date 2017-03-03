@@ -106,7 +106,7 @@ class RecSignUp extends Component {
 		            	<input type="password" placeholder="Company Password" name="companyPassword"/>
 		        	</div>
 		        	<MuiThemeProvider>
-     			 	<RaisedButton type="submit" label="Sign up" primary={true} style={style} />
+     			 		<RaisedButton type="submit" label="Sign up" primary={true} style={style} />
     				</MuiThemeProvider> 
 		    	</form>
 		    </div>

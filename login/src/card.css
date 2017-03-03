@@ -1,8 +1,5 @@
 .Card {
-	margin-right: auto;
-	margin-left: auto;
-	margin-top: 150px;
-	width: 50%;
+	margin-top: 10px;
 	background-color: white;
 	color: black;
 	resize: both;
@@ -17,7 +14,13 @@
 	border-radius: 5px;
 	margin-bottom: 50px;
 }
-
+.Container {
+	width: 50%;
+	margin-top: 150px;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: center;
+}
 input {
 	width: 70%;
 	padding: 12px 20px;

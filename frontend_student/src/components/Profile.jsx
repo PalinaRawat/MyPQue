@@ -75,7 +75,7 @@ export default class Profile extends Component {
         <Input hint="link to resume" name="resume"/>
        
       <MuiThemeProvider>
-        <RaisedButton label="Submit" type="submit" primary={true} style={style} />
+        <RaisedButton label="Submit" type="primary" primary={true} style={style} />
       </MuiThemeProvider> 
 
     </form>

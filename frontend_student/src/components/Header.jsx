@@ -7,23 +7,37 @@ import logo from '../img/logo.png';
 import Drawer from 'material-ui/Drawer';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {indigoA700} from 'material-ui/styles/colors';
+import {cyan800} from 'material-ui/styles/colors';
 import IconButton from 'material-ui/IconButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import AppBar from 'material-ui/AppBar';
+import RaisedButton from 'material-ui/RaisedButton';
+import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
+const style = {
+  
+  margin: 20,
+  width: '100%',
 
+   
+
+};
 
 const muiTheme = getMuiTheme({
   palette: {
-    textColor: indigoA700
+    textColor: cyan800
+
 ,
   },
   appBar: {
-    height: 50,
+    height: 95,
 
   },
+  drawer: {
+    color: '#F0FFFF',
+    
+  },
   });
-
 
 export default class Header extends Component {
 
@@ -44,11 +58,22 @@ export default class Header extends Component {
    	 		 onTouchTap={this.handleToggle}
   		/>
 		</MuiThemeProvider>
-	 	<MuiThemeProvider >
+	 	<MuiThemeProvider muiTheme={muiTheme}>
         <Drawer width={200} openSecondary={true} open={this.state.open} >
-        	<MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-          	<AppBar title="AppBar" />
-            </MuiThemeProvider>
+        	<MuiThemeProvider muiTheme={muiTheme}>
+          	<AppBar title="Menu" />
+        </MuiThemeProvider>
+         <div>
+      <MuiThemeProvider muiTheme={muiTheme}>
+      <Menu>
+        <MenuItem primaryText="Student profile" />
+        <MenuItem primaryText="List of companies" />
+        <MenuItem primaryText="Schedule" />
+      </Menu>
+     </MuiThemeProvider>
+   
+    
+  </div>
         </Drawer>
         </MuiThemeProvider>
 

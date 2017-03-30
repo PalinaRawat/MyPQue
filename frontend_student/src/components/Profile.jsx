@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
-import Form from 'muicss/lib/react/form';
 import Input from 'muicss/lib/react/input';
-import Textarea from 'muicss/lib/react/textarea';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import RaisedButton from 'material-ui/RaisedButton';
-import {indigoA700} from 'material-ui/styles/colors';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Option from 'muicss/lib/react/option';
 import Select from 'muicss/lib/react/select';
 
@@ -16,19 +11,13 @@ const style = {
   margin: 12,
 };
 
-const muiTheme = getMuiTheme({
-  palette: {
-    textColor: indigoA700
-,
-  },
 
-  });
 
 export default class Profile extends Component {
   render() {
     return (
 
-       <div className = "Profile">
+       <div className="Profile">
        
      <form action="/StudentProfile" method="post">
 
@@ -75,7 +64,7 @@ export default class Profile extends Component {
         <Input hint="link to resume" name="resume"/>
        
       <MuiThemeProvider>
-        <RaisedButton label="Submit" type="submit" primary={true} style={style} />
+        <RaisedButton label="Submit" type="primary" primary={true} style={style} />
       </MuiThemeProvider> 
 
     </form>

@@ -1,22 +1,46 @@
 import React, { Component } from 'react';
-import Post from './Post'
+import Post from './Post';
+import Checkbox from 'material-ui/Checkbox';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+
+const styles = {
+  block: {
+  	marginTop: 15,
+    maxWidth: 170,
+    display: 'inline-block',
+   
+  },
+  checkbox: {
+    marginBottom: 10,
+    marginRight: 10,
+
+  },
+};
+
+
 export default class Profile extends Component {
+
+	constructor(props) {
+    super(props);
+    this.state = {value: 1};
+  }
+
+  handleChange = (event, index, value) => this.setState({value});
+
   render() {
 		//				<Post link="http://tinyurl.com/gmohwa2" title="Followers++" img={require('../Imgs/followers++.png')} description="Followers++ is a mobile Android application that discovers Twitter users that are likely to follow you back. This project utilizes the asynchronous android libraries and the Twitter api."/>
 		//				<Post link="http://tinyurl.com/hwzu9hx" title="KitPvP" img={require('../Imgs/minecraft.png')} description="KitPvP is a minecraft server plugin that utilizes the bukkit api to build a structured kit based player vs player combat system inside minecraft. This project utilized my knowledge in data structures and algorithms to develop efficient server code."/>
 
 		var data = [
 			{
-				'title': 'Derivative Calculator',
-				'link': 'https://github.com/koochi10/Derivative-Calculator',
-				'image': require('../Imgs/derivative.png'),
-				'description': 'A Simple derivative Calculator that given a mathematical expression is able to compute its derivative. This is done by converting to Reverse Polish Notaion and building a Binary Expression Tree. Click me for more information and to view source code.'
+				'Name': 'Facebook',
+				'Description': 'HEllo'
+
 			},
 			{
-				'title': 'Followers++',
-				'link': 'http://tinyurl.com/gmohwa2',
-				'image': require('../Imgs/followers++.png'),
-				'description': 'Followers++ is a mobile Android application that discovers Twitter users that are likely to follow you back. This project utilizes the asynchronous android libraries and the Twitter api.'
+				'Name': 'Google',
+				'Description': '123'
 
 			},
 			
@@ -25,13 +49,55 @@ export default class Profile extends Component {
 
 		let mapped = data.map((tableItem, i) => {
 			return(
-				<Post key={i} link={tableItem.link} title={tableItem.title} img={tableItem.image} description={tableItem.description} />
+
+				<Post key={i} Name={tableItem.Name} Description={tableItem.Description}  />
+		
 			);
 		})
 		return(
-			<div className="Companies">
+			<div>
+			<MuiThemeProvider>
+				<div className="Checkbox">
+				<Checkbox 
+      				label="Full-time"
+      				style={styles.checkbox}
+      				style={styles.block} />
+      			<Checkbox 
+      				label="Internship"
+      				style={styles.checkbox}
+      				style={styles.block} />
+      			<Checkbox 
+      				label="Freshman"
+      				style={styles.checkbox}
+      				style={styles.block} />
+      			<Checkbox 
+      				label="Sophomore"
+      				style={styles.checkbox}
+      				style={styles.block} />
+      			<Checkbox 
+      				label="Junior"
+      				style={styles.checkbox}
+      				style={styles.block} />
+      			<Checkbox 
+      				label="Senior"
+      				style={styles.checkbox}
+      				style={styles.block} />
+      			<Checkbox 
+      				label="Sponsoring visa"
+      				style={styles.checkbox}
+      				style={styles.block} />
+
+      			</div>
+
+    		</MuiThemeProvider>
+
+
+    		
 				{mapped}
+				
+				
 			</div>
+			
 		);
 	}
 }

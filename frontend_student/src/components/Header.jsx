@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 
 const muiTheme = getMuiTheme({
   palette: {
-    textColor: cyan800,
+    
   },
   appBar: {
     height: 95,
@@ -45,19 +45,22 @@ export default class Header extends Component {
       />
       </MuiThemeProvider>
       <MuiThemeProvider muiTheme={muiTheme}>
-      <Drawer width={200} openSecondary={true} open={this.state.open} >
-          <MuiThemeProvider muiTheme={muiTheme}>
-          <AppBar title="Menu" />
+      <Drawer width={200} openPrimary={true} width={200} open={this.state.open} >
+          <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+          <AppBar iconElementLeft={<IconButton><img src={logo} className="App-logo" alt="logo" /></IconButton>} onTouchTap={this.handleToggle}/>
           </MuiThemeProvider>
             <div>
             <MuiThemeProvider muiTheme={muiTheme}>
             <Menu>
     
               <MenuItem 
-              primaryText="Company profile" 
-              containerElement={<Link to="/" />}
+              primaryText="Student profile" 
+              containerElement={<Link to="Profile" />}
               />
-              <MenuItem primaryText="List of companies" />
+              <MenuItem
+               primaryText="List of companies" 
+               containerElement={<Link to="Companies" />}
+               />
               <MenuItem primaryText="Schedule" />
             </Menu>
             </MuiThemeProvider>

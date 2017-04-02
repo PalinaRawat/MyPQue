@@ -58,7 +58,7 @@ export default class Profile extends Component {
           <div className="mui--text-left">Looking for</div>
 
 
-            <MuiThemeProvider>
+        <MuiThemeProvider>
           <div className="Checkbox" style={styles.checkbox}>
             <Checkbox 
               label="Full-time"
@@ -66,19 +66,26 @@ export default class Profile extends Component {
             <Checkbox 
               label="Internship"
               style={styles.block} />
-
             </div>
-
         </MuiThemeProvider>
       
-         
          <div className="mui--text-left">Hiring</div>
-          <Select defaultValue="option-2" name="hiring">
-            <Option value="Freshman" label="Freshman" />
-            <Option value="Sophomore" label="Sophomore" />
-             <Option value="Junior" label="Junior" />
-            <Option value="Senior" label="Senior" />
-          </Select>
+          <MuiThemeProvider>
+          <div className="Checkbox" style={styles.checkbox}>
+            <Checkbox 
+              label="Freshman"
+              style={styles.block} />
+            <Checkbox 
+              label="Sophomore"
+              style={styles.block} />
+            <Checkbox 
+              label="Junior"
+              style={styles.block} />
+            <Checkbox 
+              label="Senior"
+              style={styles.block} />
+            </div>
+            </MuiThemeProvider>
 
 
           <div className="mui--text-left">Sponsoring Visas ?</div>

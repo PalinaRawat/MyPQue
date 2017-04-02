@@ -9,12 +9,26 @@ import {indigoA700} from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Option from 'muicss/lib/react/option';
 import Select from 'muicss/lib/react/select';
+import Checkbox from 'material-ui/Checkbox';
 
 import '../css/Profile.css';
 
 const style = {
   margin: 12,
 };
+
+
+const styles = {
+  block: {
+    marginTop: 15,
+    maxWidth: 170,
+    display: 'inline-block',
+   
+  },
+  checkbox: {
+  },
+};
+
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -42,10 +56,21 @@ export default class Profile extends Component {
           
 
           <div className="mui--text-left">Looking for</div>
-          <Select defaultValue="option-2" name="lookingFor">
-            <Option value="Internship" label="Internship" />
-            <Option value="Full-time" label="Full-time" />
-          </Select>
+
+
+            <MuiThemeProvider>
+          <div className="Checkbox" style={styles.checkbox}>
+            <Checkbox 
+              label="Full-time"
+              style={styles.block} />
+            <Checkbox 
+              label="Internship"
+              style={styles.block} />
+
+            </div>
+
+        </MuiThemeProvider>
+      
          
          <div className="mui--text-left">Hiring</div>
           <Select defaultValue="option-2" name="hiring">

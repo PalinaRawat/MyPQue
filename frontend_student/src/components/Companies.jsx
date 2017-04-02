@@ -12,9 +12,6 @@ const styles = {
    
   },
   checkbox: {
-    marginBottom: 10,
-    marginRight: 10,
-
   },
 };
 
@@ -57,34 +54,27 @@ export default class Profile extends Component {
 		return(
 			<div>
 			<MuiThemeProvider>
-				<div className="Checkbox">
+				<div className="Checkbox" style={styles.checkbox}>
 				<Checkbox 
       				label="Full-time"
-      				style={styles.checkbox}
       				style={styles.block} />
       			<Checkbox 
       				label="Internship"
-      				style={styles.checkbox}
       				style={styles.block} />
       			<Checkbox 
       				label="Freshman"
-      				style={styles.checkbox}
       				style={styles.block} />
       			<Checkbox 
       				label="Sophomore"
-      				style={styles.checkbox}
       				style={styles.block} />
       			<Checkbox 
       				label="Junior"
-      				style={styles.checkbox}
       				style={styles.block} />
       			<Checkbox 
       				label="Senior"
-      				style={styles.checkbox}
       				style={styles.block} />
       			<Checkbox 
       				label="Sponsoring visa"
-      				style={styles.checkbox}
       				style={styles.block} />
 
       			</div>

@@ -13,8 +13,9 @@ public class CompanyQueue {
     private Queue<QueuePosition>[] queues;
     int numberOfQueues = 5;
 
-    public CompanyQueue() {
-        currentlySpeaking = new ArrayList<>();
+    public CompanyQueue(int numRecruiters) {
+        currentlySpeaking = new ArrayList<QueuePosition>();
+        this.queues = new Queue[numberOfQueues];
         for (int i = 0; i < numberOfQueues; i++) {
             queues[i] = new LinkedList<QueuePosition>();
         }
@@ -58,7 +59,41 @@ public class CompanyQueue {
         return -1;
     }
 
-    
+    public boolean dequeueQueuePosition() {
+
+        if (queues[0].isEmpty()) {
+            return false;
+        }
+
+        QueuePosition qp = queues[0].poll();
+        currentlySpeaking.add(qp);
+        return true;
+    }
+
+    public boolean removeFromSpeaking(QueuePosition qp) {
+
+        for (QueuePosition q: currentlySpeaking) {
+            if (q == qp) {
+                currentlySpeaking.remove(qp);
+                break;
+            }
+        }
+        return true;
+    }
 
 
+    public void displayCompanyQueue(int companyID){
+
+        System.out.println("Company # " + companyID);
+        for (int i = 0; i < queues.length; i++) {
+            System.out.print("q" + i + " :\t");
+            for (QueuePosition q : queues[i]) {
+                Student temp = q.getStudent(q.getStudentID());
+                //temp.displayProfile();
+                System.out.print(temp.getID() + ", ");
+            }
+            System.out.println();
+        }
+
+    }
 }

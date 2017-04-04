@@ -1,3 +1,5 @@
+import javax.management.remote.SubjectDelegationPermission;
+import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -85,6 +87,13 @@ public class CompanyQueue {
     public void displayCompanyQueue(int companyID){
 
         System.out.println("Company # " + companyID);
+        System.out.print("Current :\t");
+        for (QueuePosition qp: currentlySpeaking) {
+            Student temp = qp.getStudent(qp.getStudentID());
+            System.out.print(temp.getID() + ", ");
+        }
+
+        System.out.println();
         for (int i = 0; i < queues.length; i++) {
             System.out.print("q" + i + " :\t");
             for (QueuePosition q : queues[i]) {

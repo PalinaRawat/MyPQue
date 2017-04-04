@@ -33,7 +33,7 @@ public class Company {
     }
 
     public boolean update(int studentID) {
-        Student s = Student.getStudentFromID(studentID);
+        Student s = Student.getStudent(studentID);
         QueuePosition qp = s.getQueuePositions()[0];
         companyQueue.removeFromSpeaking(qp);
         s.updatePreferences();

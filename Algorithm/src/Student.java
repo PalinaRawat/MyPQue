@@ -1,4 +1,5 @@
 import java.awt.event.ComponentAdapter;
+import java.util.ArrayList;
 
 /**
  * Created by akshatgoyal on 3/30/17.
@@ -9,6 +10,16 @@ enum Standings {
 };
 
 public class Student {
+
+    static ArrayList<Student> s;
+    static ArrayList<Company> c;
+
+    public static void sets(ArrayList<Student> stud) {
+        s = stud;
+    }
+    public static void setc(ArrayList<Company> comp) {
+        c = comp;
+    }
 
     // Student ID
     private int ID;
@@ -25,9 +36,6 @@ public class Student {
     // Positions
     private QueuePosition queuePositions[];
 
-    public Student() {
-
-    }
 
     public Student(int ID, String firstName, String lastName, String major, Standings standing, int gradYear, String resumeLink) {
         this.ID = ID;
@@ -114,8 +122,23 @@ public class Student {
     }
 
 
-    public static Student getStudentFromID(int ID) {
-        return new Student();
+    public static Company getCompany(int id) {
+        // return new Company(id);
+        for (Company company: c) {
+            if(company.getCompanyID() == id)
+                return company;
+        }
+        System.out.println("error2 : no company");
+        return null;
+    }
+
+    public static Student getStudent(int ID){
+        for (Student student: s) {
+            if(student.getID() == ID)
+                return student;
+        }
+        System.out.println("error1 : no student");
+        return null;
     }
 
     /**
@@ -156,10 +179,12 @@ public class Student {
      */
     public boolean updatePreferences() {
 
-        for (int i = 0; i < queuePositions.length; i++) {
+        for (int i = 0; i < queuePositions.length - 1; i++) {
             if (queuePositions[i+1] != null) {
                 queuePositions[i] = queuePositions[i+1];
+                queuePositions[i+1] = null;
                 queuePositions[i].setCurrentPreference(i);
+
             } else {
                 queuePositions[i] = null;
                 break;

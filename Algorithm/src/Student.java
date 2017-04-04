@@ -1,3 +1,5 @@
+import java.awt.event.ComponentAdapter;
+
 /**
  * Created by akshatgoyal on 3/30/17.
  */
@@ -8,8 +10,10 @@ enum Stadings {
 
 public class Student {
 
-    // Profile Stuff
+    // Student ID
     private int ID;
+
+    // Profile Stuff
     private String firstName;
     private String lastName;
     private String fullName;
@@ -100,16 +104,53 @@ public class Student {
     /**
      * Initiates queuePositions for students and add student to the company queues.
      */
-    private boolean createPrefernces(Company companies[]) {
+    public boolean createPrefernces(Company preferredCompanies[]) {
+
+        initQueuePositions(preferredCompanies);
+        insertInCompanies(this.queuePositions, preferredCompanies);
+
+
+        return true;
+    }
+
+    public boolean initQueuePositions(Company preferredCompanies[]) {
+        try {
+            for (int i = 0; i < preferredCompanies.length; i++) {
+                queuePositions[i] = new QueuePosition(i, preferredCompanies[i].getCompanyID(), this.getID());
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean insertInCompanies(QueuePosition positions[], Company preferredCompanies[]) {
+
+        for (int i = 0; i < positions.length; i++) {
+            preferredCompanies[i].getCompanyQueue().insertInCompany(positions[i]);
+        }
         return true;
     }
 
 
     /**
-     *
      * Updates the student preferences. Called in Company update method.
      */
-    private boolean updatePreferences() {
+    public boolean updatePreferences() {
+
+        for (int i = 0; i < queuePositions.length; i++) {
+            if (queuePositions[i+1] != null) {
+                queuePositions[i] = queuePositions[i+1];
+                queuePositions[i].setCurrentPreference(i);
+            } else {
+                queuePositions[i] = null;
+                break;
+            }
+        }
+
+
+
         return true;
     }
 

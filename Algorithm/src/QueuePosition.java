@@ -29,6 +29,8 @@ public class QueuePosition {
     }
 
     public void setCurrentPreference(int currentPreference) {
+        Company company = getCompany(this.companyID);
+        company.getCompanyQueue().removeAndInsertInCompany(this, this.currentPreference - 1);
         this.currentPreference = currentPreference;
     }
 
@@ -55,4 +57,9 @@ public class QueuePosition {
     public void setTimeRemaining(double timeRemaining) {
         this.timeRemaining = timeRemaining;
     }
+
+    public Company getCompany(int id) {
+        return new Company();
+    }
+
 }

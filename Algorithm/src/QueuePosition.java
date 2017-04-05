@@ -1,7 +1,20 @@
+import java.util.ArrayList;
+
 /**
  * Created by akshatgoyal on 3/30/17.
  */
 public class QueuePosition {
+
+    public static ArrayList<Company> c;
+    public static ArrayList<Student> s;
+
+    public static void sets(ArrayList<Student> stud){
+        s = stud;
+    }
+    public static void setc(ArrayList<Company> comp){
+        c = comp;
+    }
+
 
     private int currentPreference;      // Current queue
     private int firstPreference;        // First chosen queue
@@ -29,6 +42,8 @@ public class QueuePosition {
     }
 
     public void setCurrentPreference(int currentPreference) {
+        Company company = getCompany(this.companyID);
+        company.getCompanyQueue().removeAndInsertInCompany(this, this.currentPreference - 1);
         this.currentPreference = currentPreference;
     }
 
@@ -55,4 +70,27 @@ public class QueuePosition {
     public void setTimeRemaining(double timeRemaining) {
         this.timeRemaining = timeRemaining;
     }
+
+    public Company getCompany(int id) {
+       // return new Company(id);
+        for (Company company: c) {
+            if(company.getCompanyID() == id)
+                return company;
+        }
+        System.out.println("error2 : no company");
+        return null;
+    }
+
+    public Student getStudent(int ID){
+        for (Student student: s) {
+            if(student.getID() == ID)
+                return student;
+        }
+        System.out.println("error1 : no student");
+        return null;
+    }
+
+
+
+
 }

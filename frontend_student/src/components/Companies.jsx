@@ -7,7 +7,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 const styles = {
   block: {
   	marginTop: 15,
-    maxWidth: 170,
+    maxWidth: 130,
     display: 'inline-block',
    
   },
@@ -76,6 +76,15 @@ export default class Profile extends Component {
       			<Checkbox 
       				label="Sponsoring visa"
       				style={styles.block} />
+            <Checkbox 
+              label="Computer Science"
+              style={styles.block} />
+            <Checkbox 
+              label="Computer Engineering"
+              style={styles.block} />
+            <Checkbox 
+              label="Electrical Engineering"
+              style={styles.block} />
 
       			</div>
 

@@ -29,9 +29,10 @@ ReactDOM.render((
    <HashRouter>
       
       <App>
+        <Route exact path="/" component={Companies} />
         <Route path="/Profile" component={Profile} />
         <Route path="/Companies" component={Companies} />
-      
       </App>
-   </HashRouter >
+
+   </HashRouter>
 ), document.getElementById( 'root' ) )

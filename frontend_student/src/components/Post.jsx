@@ -27,15 +27,15 @@ class Post extends Component {
 					</div>
 					<MuiThemeProvider>
 					<DropDownMenu 
-					value={this.state.value}
-          			onChange={this.handleChange}
-          			autoWidth={true}>
-        				<MenuItem value={1} primaryText="rank" />
-        				<MenuItem value={2} primaryText="1" />
-        				<MenuItem value={3} primaryText="2" />
-        				<MenuItem value={4} primaryText="3" />
-        				<MenuItem value={5} primaryText="4" />
-        				<MenuItem value={6} primaryText="5" />
+						value={this.state.value}
+	          			onChange={this.handleChange}
+	          			autoWidth={true}>
+	        				<MenuItem value={1} primaryText="rank" />
+	        				<MenuItem value={2} primaryText="1" />
+	        				<MenuItem value={3} primaryText="2" />
+	        				<MenuItem value={4} primaryText="3" />
+	        				<MenuItem value={5} primaryText="4" />
+	        				<MenuItem value={6} primaryText="5" />
       				</DropDownMenu>
       				</MuiThemeProvider>
 			</div>

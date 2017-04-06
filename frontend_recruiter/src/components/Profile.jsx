@@ -53,6 +53,24 @@ export default class Profile extends Component {
 
           <div className="mui--text-left">Description</div>
           <Textarea hint="Company Description" name="description"/>
+
+        <div className="mui--text-left">Required major</div>
+
+
+        <MuiThemeProvider>
+          <div className="Checkbox" style={styles.checkbox}>
+            <Checkbox 
+              label="Computer Science"
+              style={styles.block} />
+            <Checkbox 
+              label="Computer Engineering"
+              style={styles.block} />
+
+            <Checkbox 
+              label="Electrical Engineering"
+              style={styles.block} />
+            </div>
+        </MuiThemeProvider>
           
 
           <div className="mui--text-left">Looking for</div>

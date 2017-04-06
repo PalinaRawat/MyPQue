@@ -249,6 +249,17 @@ public class Student {
         }
     }
 
+    public boolean addAnotherPreferrence(Company company) {
+
+        if (queuePositions[numPreferences - 1] != null) {
+            System.out.println("Pahle dequeue to kar mc.");
+            return false;
+        }
+
+        queuePositions[numPreferences - 1] = new QueuePosition(numPreferences - 1, company.getCompanyID(), this.getID());
+        return true;
+    }
+
 
     public void displayProfile(){
         String out = "";

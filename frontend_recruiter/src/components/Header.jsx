@@ -7,7 +7,7 @@ import logo from '../img/logo.png';
 import Drawer from 'material-ui/Drawer';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {/*indigoA700*/cyan800} from 'material-ui/styles/colors';
+import {cyan800} from 'material-ui/styles/colors';
 import IconButton from 'material-ui/IconButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import AppBar from 'material-ui/AppBar';
@@ -63,12 +63,16 @@ export default class Header extends Component {
             <Menu>
 
               <MenuItem
-              primaryText="Company profile"
+              primaryText="Company Profile"
               containerElement={<Link to="Profile" />}
               />
               <MenuItem
                primaryText="Current Queue"
-               //containerElement={<Link to="Queue" />}
+               containerElement={<Link to="Queue" />}
+               />
+               <MenuItem
+                 primaryText="List of Students"
+                 containerElement={<Link to="Students" />}
                />
             </Menu>
             </MuiThemeProvider>

@@ -45,17 +45,17 @@ public class Driver {
         }
 
         while(true){
-            System.out.println("Enter Action:\n1) Dequeue\t2) Update\t3)display all companies\t4)exit");
+            System.out.println("Enter Action:\n1) Dequeue\t2) Update\t3)display\t4)OPtimize\t5)Add Student\t\t4)exit");
             int action = scan.nextInt();
             Company comp = null;
-            if (action != 3 && action != 4) {
+            if (action == 1 || action == 2) {
                 System.out.println("Company ID = ");
                 int comp_id = scan.nextInt();
-
                 for (Company c:companies) {
-                    if(c.getCompanyID() == comp_id)
+                    if(c.getCompanyID() == comp_id) {
                         comp = c;
-                    break;
+                        break;
+                    }
                 }
             }
 
@@ -79,6 +79,23 @@ public class Driver {
                     }
                     break;
                 case 4:
+                    System.out.println("enter student you want to optimize");
+                    int stid = scan.nextInt();
+                    Student s1 = Student.getStudent(stid);
+                    s1.optimize();
+                    s1.displayProfile();
+                    break;
+                case 5:
+                    Student s2 = new Student(100 + i++, "", "", "", null, i, "");
+                    students.add(s2);
+                    Student.sets(students);
+                    Company com[] = new Company[5];
+                    for (int j = 0; j < 5; j++) {
+                        com[j] = companies.get(j);
+                    }
+                    s2.createPrefernces(com);
+                    break;
+                case 6:
                     System.out.println("bye bye :)");
                     System.exit(1);
             }

@@ -41,10 +41,17 @@ public class QueuePosition {
         return currentPreference;
     }
 
-    public void setCurrentPreference(int currentPreference) {
+    public void setCurrentPreference(int currentPreference, boolean fromOPT) {
         Company company = getCompany(this.companyID);
-        company.getCompanyQueue().removeAndInsertInCompany(this, this.currentPreference - 1);
         this.currentPreference = currentPreference;
+        if (!fromOPT) {
+            company.getCompanyQueue().removeAndInsertInCompany(this, this.currentPreference - 1);
+            this.firstPreference = currentPreference;
+        } else {
+            company.getCompanyQueue().removeAndInsertInCompany(this, 0);
+            company.getCompanyQueue().getNumDummiesInQueue()[0]++;
+        }
+
     }
 
     public int getCompanyID() {

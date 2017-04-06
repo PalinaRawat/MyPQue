@@ -31,8 +31,13 @@ export default class Profile extends Component {
         <div className="mui--text-left">Last Name</div>
         <Input hint="Last Name" name="lastName"/>
 
-        <div className="mui--text-left">Major</div>
-        <Input hint="Major" name="major" />
+         <div className="mui--text-left">Major</div>
+        <Select defaultValue="option-2" name="opType">
+          <Option value="Computer Science" label="Computer Science" />
+          <Option value="Computer Engineering" label="Computer Engineering" />
+          <Option value="Electrical Engineering" label="Electrical Engineering" />
+
+        </Select>
 
         <div className="mui--text-left">Class Standing</div>
         <Select defaultValue="option-2" name="standing">

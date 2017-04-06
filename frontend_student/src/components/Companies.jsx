@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import Post from './Post';
-
-
+import '../css/Companies.css';
+import Checkbox from 'material-ui/Checkbox';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class ProductRow extends React.Component {
   render() {
 
     return (
-      <tr>
+      <div className="aa">
          <Post Name={this.props.product.Name} Description={this.props.product.Description}  />
-      </tr>
+      </div>
     );
   }
 }
@@ -56,6 +57,19 @@ class ProductTable extends React.Component {
     );
   }
 }
+
+const styles = {
+  block: {
+    maxWidth: 150,
+    display: 'flex',
+    flexDirection: 'row',
+    marginLeft: '50px',
+
+  },
+  checkbox: {
+    marginBottom: 16,
+  },
+};
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -119,122 +133,96 @@ class SearchBar extends React.Component {
 
   render() {
     return (
-      <form>
-        <input
-          type="text"
-          placeholder="Search..."
-          value="yo"
-        />
-        <p>
-          <input
-            type="checkbox"
-            checked={this.props.inStockOnly}
-            onChange={this.handleInStockInputChange}
-          />
-          {' '}
-          in stock
-          </p>
-
-          <p>
+      
+       <form>
+       <div className="checkboxes">
           <input
             type="checkbox"
             checked={this.props.international}
             onChange={this.handleInternationalChange}
           />
-          {' '}
-          Sponsoring Visa
-        </p>
+          <label >Sponsoring Visa</label>
+          
+        
 
-        <p>
+        
         <input
           type="checkbox"
           checked={this.props.fullTime}
           onChange={this.handleFullTimeChange}
         />
-        {' '}
-        Full Time
-      </p>
+         <label >Full Time</label >
+      
 
-      <p>
+      
       <input
         type="checkbox"
         checked={this.props.internship}
         onChange={this.handleInternshipChange}
       />
-      {' '}
-      Internship
-    </p>
+      <label >Internship</label >
+    
 
-    <p>
+  
     <input
       type="checkbox"
       checked={this.props.freshman}
       onChange={this.handleFreshmanChange}
     />
-    {' '}
-    Hiring Freshman
-  </p>
+    <label >Hiring Freshmen</label >
+  
 
-  <p>
+
   <input
     type="checkbox"
     checked={this.props.sophomore}
     onChange={this.handleSophomoreChange}
   />
-  {' '}
-  Hiring Sophomore
-</p>
+   <label >Hiring Sophomores</label >
 
-<p>
+
+
 <input
   type="checkbox"
   checked={this.props.junior}
   onChange={this.handleJuniorChange}
 />
-{' '}
-Hiring Juniors
-</p>
+<label >Hiring Juniors</label >
 
-<p>
+
 <input
   type="checkbox"
   checked={this.props.senior}
   onChange={this.handleSeniorChange}
 />
-{' '}
-Hiring Seniors
-</p>
+<label >Hiring Seniors</label >
 
-<p>
 <input
   type="checkbox"
   checked={this.props.computerScience}
   onChange={this.handleComputerScienceChange}
 />
-{' '}
-Computer Science
-</p>
+<label >Computer Science </label >
 
-<p>
+
+
 <input
   type="checkbox"
   checked={this.props.computerEngineering}
   onChange={this.handleComputerEngineeringChange}
 />
-{' '}
-Computer Engineering
-</p>
+<label >Computer Engineering</label >
 
-<p>
+
 <input
   type="checkbox"
   checked={this.props.electricalEngineering}
   onChange={this.handleElectricalEngineeringChange}
 />
-{' '}
-Electrical Engineering
-</p>
 
+<label >Electrical Engineering</label >
+
+      </div>
       </form>
     );
   }

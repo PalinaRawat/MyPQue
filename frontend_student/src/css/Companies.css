@@ -1,0 +1,20 @@
+.aa {
+	padding-left: 700px;
+}
+
+.checkboxes input {
+  width: 20px;
+  height: 13px;
+  padding: 10;
+  margin:10;
+  vertical-align: bottom;
+  position: relative;
+  top: -2px;
+  *overflow: hidden;
+}
+
+.checkboxes label {
+
+ padding-left: 3px;
+ padding-right: 10px;
+}

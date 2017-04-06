@@ -45,7 +45,7 @@ public class QueuePosition {
         Company company = getCompany(this.companyID);
         this.currentPreference = currentPreference;
         if (!fromOPT) {
-            company.getCompanyQueue().removeAndInsertInCompany(this, this.currentPreference - 1);
+            company.getCompanyQueue().removeAndInsertInCompany(this, this.currentPreference);
             this.firstPreference = currentPreference;
         } else {
             company.getCompanyQueue().removeAndInsertInCompany(this, 0);

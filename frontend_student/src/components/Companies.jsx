@@ -1,112 +1,155 @@
 import React, { Component } from 'react';
 import Post from './Post';
-import Checkbox from 'material-ui/Checkbox';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
-const styles = {
-  block: {
-  	marginTop: 15,
-    maxWidth: 130,
-    display: 'inline-block',
-   
-  },
-  checkbox: {
-  },
-};
 
-
-var data = [
-      {
-        'Name': 'Facebook',
-        'Description': 'HEllo',
-        'Looking for': 'Full-time',
-        'Hiring': 'Freshman',
-        'Required major': 'Computer Science',
-        'Sponsoring visas': 'false'
-
-      },
-      {
-        'Name': 'Google',
-        'Description': '123',
-        'Looking for': 'Internship',
-        'Hiring': 'Freshman',
-        'Required major': 'Computer Science',
-        'Sponsoring visas': 'true'
-
-      },
-      
-      
-    ];
-
-export default class Profile extends Component {
-
-	constructor(props) {
-    super(props);
-    this.state = {value: 1};
-  }
-
-  handleChange = (event, index, value) => this.setState({value});
-
+class ProductRow extends React.Component {
   render() {
 
-		
+    return (
+      <tr>
+         <Post Name={this.props.product.Name} Description={this.props.product.Description}  />
+      </tr>
+    );
+  }
+}
 
-		let mapped = data.map((tableItem, i) => {
-			return(
-        //should display filtered
-				<Post key={i} Name={tableItem.Name} Description={tableItem.Description}  />
-		
-			);
-		})
-		return(
-			<div>
-			<MuiThemeProvider>
-				<div className="Checkbox" style={styles.checkbox}>
-				<Checkbox 
-      				label="Full-time"
-      				style={styles.block} 
-              checked={this.props.fulltime}
+class ProductTable extends React.Component {
+  render() {
+    var rows = [];
 
-              />
-      			<Checkbox 
-      				label="Internship"
-      				style={styles.block} />
-      			<Checkbox 
-      				label="Freshman"
-      				style={styles.block} />
-      			<Checkbox 
-      				label="Sophomore"
-      				style={styles.block} />
-      			<Checkbox 
-      				label="Junior"
-      				style={styles.block} />
-      			<Checkbox 
-      				label="Senior"
-      				style={styles.block} />
-      			<Checkbox 
-      				label="Sponsoring visa"
-      				style={styles.block} />
-            <Checkbox 
-              label="Computer Science"
-              style={styles.block} />
-            <Checkbox 
-              label="Computer Engineering"
-              style={styles.block} />
-            <Checkbox 
-              label="Electrical Engineering"
-              style={styles.block} />
+    console.log(this.props.inStockOnly)
+    this.props.products.forEach((product) => {
+      if (!product.stocked && this.props.inStockOnly) {
+        return;
+      }
 
-      			</div>
+      rows.push(<ProductRow product={product} key={product.Name} />);
 
-    		</MuiThemeProvider>
+    });
+    return (
+      <table>
+        <tbody>{rows}</tbody>
+      </table>
+    );
+  }
+}
 
-    		
-				{mapped}
-				
-				
-			</div>
-			
-		);
-	}
+class SearchBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleInStockInputChange = this.handleInStockInputChange.bind(this);
+  }
+
+
+  handleInStockInputChange(e) {
+    this.props.onInStockInput(e.target.checked);
+  }
+
+  render() {
+    return (
+      <form>
+        <input
+          type="text"
+          placeholder="Search..."
+          value="yo"
+        />
+        <p>
+          <input
+            type="checkbox"
+            checked={this.props.inStockOnly}
+            onChange={this.handleInStockInputChange}
+          />
+          {' '}
+          in stock
+          </p>
+
+          <p>
+          <input
+            type="checkbox"
+            checked={this.props.inStockOnly}
+            onChange={this.handleInStockInputChange}
+          />
+          {' '}
+          Sponsoring Visa
+        </p>
+
+      </form>
+    );
+  }
+}
+
+class FilterableProductTable extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inStockOnly: false
+    };
+
+
+    this.handleInStockInput = this.handleInStockInput.bind(this);
+  }
+
+
+
+  handleInStockInput(inStockOnly) {
+    this.setState({
+      inStockOnly: inStockOnly
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <SearchBar
+          inStockOnly={this.state.inStockOnly}
+          onInStockInput={this.handleInStockInput}
+        />
+        <ProductTable
+          products={this.props.products}
+          inStockOnly={this.state.inStockOnly}
+        />
+      </div>
+    );
+  }
+}
+
+
+/*var PRODUCTS = [
+  {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
+  {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball'},
+  {category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball'},
+  {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch'},
+  {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
+  {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
+];*/
+
+var PRODUCTS = [
+{
+         Name: 'Facebook',
+         Description: 'HEllo',
+         Hiring: 'Freshman',
+         SponsoringVisa: false,
+         stocked: false
+
+      },
+      {
+         Name: 'Google',
+         Description: '123',
+         Hiring: 'Freshman',
+         SponsoringVisa: true,
+         stocked: true
+
+      },
+];
+
+
+export default class Companies extends Component {
+  render() {
+    return (
+
+       <FilterableProductTable products={PRODUCTS} />
+
+    );
+  }
 }

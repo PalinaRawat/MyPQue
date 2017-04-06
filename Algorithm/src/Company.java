@@ -34,8 +34,20 @@ public class Company {
 
     public boolean update(int studentID) {
         Student s = Student.getStudent(studentID);
-        QueuePosition qp = s.getQueuePositions()[0];
-        companyQueue.removeFromSpeaking(qp);
+
+        int qpToRemove = 0;
+        QueuePosition[] qp = s.getQueuePositions();
+        for (int i = 1; i < qp.length; i++) {
+            if (qp[i] != null) {
+                if (qp[i].getCurrentPreference() == 0) {
+                    qpToRemove = i;
+                    break;
+                }
+            }
+        }
+
+
+        companyQueue.removeFromSpeaking(qp[qpToRemove]);
         s.updatePreferences();
         return true;
     }

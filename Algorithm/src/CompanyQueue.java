@@ -1,5 +1,3 @@
-import javax.management.remote.SubjectDelegationPermission;
-import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -10,10 +8,12 @@ import java.util.Queue;
  */
 public class CompanyQueue {
 
-    private int timePerStudent = 3;
+    private int timePerStudent = 1;
     private ArrayList<QueuePosition> currentlySpeaking;
     private Queue<QueuePosition>[] queues;
-    int numberOfQueues = 5;
+    private int[] numDummiesInQueue;
+    private int numberOfQueues = 5;
+    private int numOfAllowedDummies = 5;
 
     public CompanyQueue(int numRecruiters) {
         currentlySpeaking = new ArrayList<QueuePosition>();
@@ -21,6 +21,55 @@ public class CompanyQueue {
         for (int i = 0; i < numberOfQueues; i++) {
             queues[i] = new LinkedList<QueuePosition>();
         }
+        numDummiesInQueue = new int[numOfAllowedDummies];
+    }
+
+    public int getTimePerStudent() {
+        return timePerStudent;
+    }
+
+    public void setTimePerStudent(int timePerStudent) {
+        this.timePerStudent = timePerStudent;
+    }
+
+    public ArrayList<QueuePosition> getCurrentlySpeaking() {
+        return currentlySpeaking;
+    }
+
+    public void setCurrentlySpeaking(ArrayList<QueuePosition> currentlySpeaking) {
+        this.currentlySpeaking = currentlySpeaking;
+    }
+
+    public int[] getNumDummiesInQueue() {
+        return numDummiesInQueue;
+    }
+
+    public void setNumDummiesInQueue(int[] numDummiesInQueue) {
+        this.numDummiesInQueue = numDummiesInQueue;
+    }
+
+    public Queue<QueuePosition>[] getQueues() {
+        return queues;
+    }
+
+    public void setQueues(Queue<QueuePosition>[] queues) {
+        this.queues = queues;
+    }
+
+    public int getNumOfAllowedDummies() {
+        return numOfAllowedDummies;
+    }
+
+    public void setNumOfAllowedDummies(int numOfAllowedDummies) {
+        this.numOfAllowedDummies = numOfAllowedDummies;
+    }
+
+    public int getNumberOfQueues() {
+        return numberOfQueues;
+    }
+
+    public void setNumberOfQueues(int numberOfQueues) {
+        this.numberOfQueues = numberOfQueues;
     }
 
     public boolean insertInCompany(QueuePosition position) {
@@ -32,11 +81,12 @@ public class CompanyQueue {
     public boolean removeAndInsertInCompany(QueuePosition position, int newPosition) {
 
         if (newPosition == -1) {
-            queues[position.getCurrentPreference()].remove(position);
+            queues[position.getFirstPreference()].remove(position);
             return true;
         }
-        queues[position.getCurrentPreference()].remove(position);
+        queues[position.getFirstPreference()].remove(position);
         queues[newPosition].add(position);
+        position.setTimeRemaining(queues[newPosition].size()*timePerStudent);
         return true;
 
     }

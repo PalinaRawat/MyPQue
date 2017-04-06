@@ -35,6 +35,8 @@ public class Student {
 
     // Positions
     private QueuePosition queuePositions[];
+    int numPreferences = 5;
+    double thresholdTime = 1;
 
 
     public Student(int ID, String firstName, String lastName, String major, Standings standing, int gradYear, String resumeLink) {
@@ -46,7 +48,7 @@ public class Student {
         this.standing = standing;
         this.gradYear = gradYear;
         this.resumeLink = resumeLink;
-        this.queuePositions = new QueuePosition[5];
+        this.queuePositions = new QueuePosition[numPreferences];
     }
 
     public int getID() {
@@ -179,11 +181,21 @@ public class Student {
      */
     public boolean updatePreferences() {
 
-        for (int i = 0; i < queuePositions.length - 1; i++) {
+        int preferrenceDequeued = 0;
+        for (int i = 1; i < queuePositions.length; i++) {
+            if (queuePositions[i] != null) {
+                if (queuePositions[i].getCurrentPreference() == 0) {
+                    preferrenceDequeued = i;
+                    break;
+                }
+            }
+        }
+
+        for (int i = preferrenceDequeued; i < queuePositions.length - 1; i++) {
             if (queuePositions[i+1] != null) {
                 queuePositions[i] = queuePositions[i+1];
                 queuePositions[i+1] = null;
-                queuePositions[i].setCurrentPreference(i);
+                queuePositions[i].setCurrentPreference(i, false);
 
             } else {
                 queuePositions[i] = null;
@@ -196,12 +208,54 @@ public class Student {
         return true;
     }
 
+
+    public boolean optimize() {
+
+        //Threshold time
+        double scheduledWaitTime = queuePositions[0].getTimeRemaining() - thresholdTime;
+        if (scheduledWaitTime <= 0) {
+            System.out.println("Unable to Optimize - About to speak. Jahan khada hai khade rah mc.");
+            return false;
+        }
+
+        //Check times for all other companies
+        QueuePosition opt = null;
+        for (int i = 1; i < numPreferences; i++) {
+            if (queuePositions[i] != null) {
+                Company temp = getCompany(queuePositions[i].getCompanyID());
+                double timeInTempQ0 = temp.getCompanyQueue().getQueues()[0].size()*temp.getCompanyQueue().getTimePerStudent();
+                if (scheduledWaitTime >= timeInTempQ0) {
+                    opt = queuePositions[i];
+                    break;
+                }
+            }
+        }
+
+        // change queue positions
+        if (opt != null) {
+            Company c = opt.getCompany(opt.getCompanyID());
+            // Check dummy students
+            if (c.getCompanyQueue().getNumDummiesInQueue()[0] < c.getCompanyQueue().getNumOfAllowedDummies()) {
+                opt.setCurrentPreference(0, true);
+                System.out.println("Optimized - moved from " + opt.getFirstPreference() + " to "+ opt.getCurrentPreference());
+                return true;
+            } else {
+                System.out.println("Unable to Optimize - Full Dummies. Jahan khada hai khade rah mc.");
+                return false;
+            }
+        } else {
+            System.out.println("Unable to Optimize - No company time valid. Jahan khada hai khade rah mc.");
+            return false;
+        }
+    }
+
+
     public void displayProfile(){
         String out = "";
         out += this.getID() + "\t";
         for (int i = 0; i < queuePositions.length; i++) {
             if(queuePositions[i] != null)
-                out += queuePositions[i].getCompanyID() + "\t";
+                out += queuePositions[i].getCompanyID() +" ("+ queuePositions[i].getCurrentPreference() + ")"+"\t";
             else
                 out +=  "null\t";
         }

@@ -19,8 +19,11 @@ class ProductTable extends React.Component {
     var rows = [];
 
     console.log(this.props.inStockOnly)
+    console.log(this.props.international);
     this.props.products.forEach((product) => {
-      if (!product.stocked && this.props.inStockOnly) {
+      if (!product.SponsoringVisa && this.props.international) {
+        return;
+      } else if (!product.stocked && this.props.inStockOnly) {
         return;
       }
 
@@ -39,11 +42,15 @@ class SearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.handleInStockInputChange = this.handleInStockInputChange.bind(this);
+    this.handleInternationalChange = this.handleInternationalChange.bind(this);
   }
-
 
   handleInStockInputChange(e) {
     this.props.onInStockInput(e.target.checked);
+  }
+
+  handleInternationalChange(e) {
+    this.props.onInternational(e.target.checked);
   }
 
   render() {
@@ -67,8 +74,8 @@ class SearchBar extends React.Component {
           <p>
           <input
             type="checkbox"
-            checked={this.props.inStockOnly}
-            onChange={this.handleInStockInputChange}
+            checked={this.props.international}
+            onChange={this.handleInternationalChange}
           />
           {' '}
           Sponsoring Visa
@@ -83,11 +90,13 @@ class FilterableProductTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      inStockOnly: false
+      inStockOnly: false,
+      international: false
     };
 
 
     this.handleInStockInput = this.handleInStockInput.bind(this);
+    this.handleInternational = this.handleInternational.bind(this);
   }
 
 
@@ -98,16 +107,25 @@ class FilterableProductTable extends React.Component {
     })
   }
 
+  handleInternational(international) {
+    this.setState({
+      international: international
+    })
+  }
+
   render() {
     return (
       <div>
         <SearchBar
           inStockOnly={this.state.inStockOnly}
+          international={this.state.international}
           onInStockInput={this.handleInStockInput}
+          onInternational={this.handleInternational}
         />
         <ProductTable
           products={this.props.products}
           inStockOnly={this.state.inStockOnly}
+          international={this.state.international}
         />
       </div>
     );
@@ -129,7 +147,7 @@ var PRODUCTS = [
          Name: 'Facebook',
          Description: 'HEllo',
          Hiring: 'Freshman',
-         SponsoringVisa: false,
+         SponsoringVisa: 'Freshman',
          stocked: false
 
       },
@@ -137,6 +155,14 @@ var PRODUCTS = [
          Name: 'Google',
          Description: '123',
          Hiring: 'Freshman',
+         SponsoringVisa: false,
+         stocked: true
+
+      },
+      {
+         Name: 'Microsoft',
+         Description: '234',
+         Hiring: 'Sophomore',
          SponsoringVisa: true,
          stocked: true
 

@@ -6,6 +6,7 @@ const path = require('path')
 module.exports = (app, passport) => {
 
 	app.get('/', (req, res) => {
+		console.log('test this route');
 		res.redirect('/main');
 	});
 
@@ -83,8 +84,12 @@ module.exports = (app, passport) => {
 		User.findOne({'Recruiter.companyLogin' :req.user.Recruiter.companyLogin}, (err, user) => {
 			if(err)
 				res.send(err);
+			console.log(req.body.description);
 			user.profile.description = req.body.description;
+			console.log(req.body.lookingFor);
+			console.log(req.body.hiring);
 			user.profile.lookingFor = req.body.lookingFor;
+
 			user.profile.hiring = req.body.hiring;
 			
 			if(req.body.sponsers == 'Yes')

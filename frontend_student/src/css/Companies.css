@@ -1,5 +1,6 @@
 .aa {
-	padding-left: 700px;
+	margin: auto;
+	width: 50%;
 }
 
 .checkboxes input {
@@ -16,5 +17,32 @@
 .checkboxes label {
 
  padding-left: 3px;
- padding-right: 10px;
+ padding-right: 50px;
+}
+
+#visa {
+	padding-right: 150px;
+	font-weight: bold;
+
+}
+
+#fullTime {
+	padding-right: 50px;
+	font-weight: bold;
+}
+
+#companyList {
+	align-items: center;
+}
+
+#lineOne {
+	font-weight: bold;
+}
+
+#lineTwo {
+	font-weight: bold;
+}
+
+#lineThree {
+	font-weight: bold;
 }

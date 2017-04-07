@@ -9,7 +9,9 @@ class ProductRow extends React.Component {
 
     return (
       <div className="aa">
+        <div className="aa">
          <Post Name={this.props.product.Name} Description={this.props.product.Description}  />
+         </div>
       </div>
     );
   }
@@ -133,44 +135,28 @@ class SearchBar extends React.Component {
 
   render() {
     return (
-      
+
+
+
        <form>
        <div className="checkboxes">
-          <input
-            type="checkbox"
-            checked={this.props.international}
-            onChange={this.handleInternationalChange}
-          />
-          <label >Sponsoring Visa</label>
-          
-        
 
-        
-        <input
-          type="checkbox"
-          checked={this.props.fullTime}
-          onChange={this.handleFullTimeChange}
-        />
-         <label >Full Time</label >
-      
 
-      
-      <input
-        type="checkbox"
-        checked={this.props.internship}
-        onChange={this.handleInternshipChange}
-      />
-      <label >Internship</label >
-    
 
-  
+
+
+    <div id="lineOne">
+      <br></br>
+
+
+
     <input
       type="checkbox"
       checked={this.props.freshman}
       onChange={this.handleFreshmanChange}
     />
     <label >Hiring Freshmen</label >
-  
+
 
 
   <input
@@ -197,6 +183,11 @@ class SearchBar extends React.Component {
 />
 <label >Hiring Seniors</label >
 
+</div>
+
+<div id="lineTwo">
+  <br></br>
+
 <input
   type="checkbox"
   checked={this.props.computerScience}
@@ -220,9 +211,40 @@ class SearchBar extends React.Component {
   onChange={this.handleElectricalEngineeringChange}
 />
 
-<label >Electrical Engineering</label >
+<label >Electrical Engineering </label >
 
       </div>
+    </div>
+
+    <div id="lineThree">
+      <br></br>
+
+     <input
+       type="checkbox"
+       checked={this.props.international}
+       onChange={this.handleInternationalChange}
+     />
+     <label id="visa">Sponsoring Visa</label>
+
+
+
+   <input
+     type="checkbox"
+     checked={this.props.fullTime}
+     onChange={this.handleFullTimeChange}
+   />
+    <label id="fullTime">Full Time </label >
+
+
+
+ <input
+   type="checkbox"
+   checked={this.props.internship}
+   onChange={this.handleInternshipChange}
+ />
+ <label >Internship</label >
+
+</div>
       </form>
     );
   }
@@ -420,7 +442,7 @@ var PRODUCTS = [
       },
       {
          Name: 'Microsoft',
-         Description: '234',
+         Description: '234234',
          Hiring: 'Sophomore',
          SponsoringVisa: true,
          stocked: true,
@@ -443,7 +465,10 @@ export default class Companies extends Component {
   render() {
     return (
 
+
        <FilterableProductTable products={PRODUCTS} />
+
+
 
     );
   }

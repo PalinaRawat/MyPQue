@@ -80,8 +80,30 @@ module.exports = (app, passport) => {
 		});
 	});
 
+	app.post('/CompanyProfile', isLoggedIn, isRec, (req, res) => {
+		User.findOne({'Recruiter.companyLogin' :req.user.Recruiter.companyLogin}, (err, user) => {
+			if(err)
+				res.send(err);
+			user.profile.description = req.body.description;
+			user.profile.lookingFor = req.body.lookingFor;
+			user.profile.hiring = req.body.hiring;
+			user.profile.majors = req.body.majors;
+			
+			if(req.body.sponsers == 'Yes')
+				user.profile.sponsers = true;
+			else 
+				user.profile.sponsers = false;
+			user.profile.timePer = req.body.timePer;
+			user.profile.hasProf = true;
+			user.save((err) => {
+				if(err)
+					res.send(err);
+				res.redirect('/recmain')
+			});
+		});
+	});
+
 	app.get('/Companies', (req, res) =>  {
-		console.log('test companies route');
 		User.find({'Recruiter.isRec' : true}, (err, companies) => {
 			if(err)
 				res.send(err);
@@ -125,29 +147,24 @@ module.exports = (app, passport) => {
 		});
 	});
 
-	app.post('/CompanyProfile', isLoggedIn, isRec, (req, res) => {
-		User.findOne({'Recruiter.companyLogin' :req.user.Recruiter.companyLogin}, (err, user) => {
+	app.get('/Students', (req, res) => {
+		console.log('students route');
+		//gets the list of students
+		User.find({'Recruiter.isRec': false}, (err, students) => {
 			if(err)
 				res.send(err);
-			user.profile.description = req.body.description;
-			user.profile.lookingFor = req.body.lookingFor;
-			user.profile.hiring = req.body.hiring;
-			user.profile.majors = req.body.majors;
-			
-			if(req.body.sponsers == 'Yes')
-				user.profile.sponsers = true;
-			else 
-				user.profile.sponsers = false;
-			user.profile.timePer = req.body.timePer;
-			user.profile.hasProf = true;
-			user.save((err) => {
-				if(err)
-					res.send(err);
-				res.redirect('/recmain')
-			});
+			var newArr = [];
+			for(var j = 0; j<students.length; j++) {
+				var student = students[j];
+				var studentObject = new Object();
+				studentObject.firstName = student.local.firstName;
+				studentObject.lastName = student.local.lastName;
+				studentObject.link = student.profile.resume;
+				newArr.push(studentObject);
+			}
+			res.send(newArr);
 		});
 	});
-
 	app.get('/logout', (req, res) => {
 		req.logout();
 		res.redirect('/');

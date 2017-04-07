@@ -20,7 +20,7 @@ ReactDOM.render((
    <HashRouter>
 
       <App>
-        <Route exact path="/" component={Students} />
+        <Route exact path="/" component={Profile} />
         <Route path="/Profile" component={Profile} />
         <Route path="/Students" component={Students} />
           <Route path="/Queue" component={Queue} />

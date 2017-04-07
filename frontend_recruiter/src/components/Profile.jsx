@@ -59,14 +59,17 @@ export default class Profile extends Component {
 
         <MuiThemeProvider>
           <div className="Checkbox" style={styles.checkbox}>
-            <Checkbox 
+            <Checkbox
+              name="major" 
               label="Computer Science"
               style={styles.block} />
             <Checkbox 
+              major="major"
               label="Computer Engineering"
               style={styles.block} />
 
             <Checkbox 
+              name="major"
               label="Electrical Engineering"
               style={styles.block} />
             </div>
@@ -79,9 +82,11 @@ export default class Profile extends Component {
         <MuiThemeProvider>
           <div className="Checkbox" style={styles.checkbox}>
             <Checkbox 
+              name="lookingFor"
               label="Full-time"
               style={styles.block} />
             <Checkbox 
+              name="lookingFor"
               label="Internship"
               style={styles.block} />
             </div>
@@ -91,15 +96,19 @@ export default class Profile extends Component {
           <MuiThemeProvider>
           <div className="Checkbox" style={styles.checkbox}>
             <Checkbox 
+              name = "hiring"
               label="Freshman"
               style={styles.block} />
             <Checkbox 
+              name = "hiring"
               label="Sophomore"
               style={styles.block} />
             <Checkbox 
+              name = "hiring"
               label="Junior"
               style={styles.block} />
             <Checkbox 
+              name = "hiring"
               label="Senior"
               style={styles.block} />
             </div>

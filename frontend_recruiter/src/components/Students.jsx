@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Post from './Post';
-import Checkbox from 'material-ui/Checkbox';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 
 
 const styles = {

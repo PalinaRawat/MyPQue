@@ -75,14 +75,14 @@ module.exports = (app, passport) => {
 			user.save((err) => {
 				if(err)
 					res.send(err);
-				res.redirect('/main');
+				res.redirect('/main')
 			});
 		});
 	});
+
 	app.get('/Companies', (req, res) =>  {
 		console.log('test companies route');
 		User.find({'Recruiter.isRec' : true}, (err, companies) => {
-			
 			if(err)
 				res.send(err);
 
@@ -98,26 +98,33 @@ module.exports = (app, passport) => {
         		companyObject.Sophomore = false;
         		companyObject.Junior = false;
         		companyObject.Senior = false;
+				
+				companyObject.FullTime = false;
+        		companyObject.Internships = false;
 
         		var lookingfor = company.profile.lookingFor;
         		for(var j = 0; j<lookingfor.length; j++) {
         			companyObject[lookingfor[j]] = true;
         		}
-        		companyObject.FullTime = false;
-        		companyObject.Internships = false;
 
         		var hiring = company.profile.hiring;
+        		console.log(hiring)
         		for(var j = 0; j<hiring.length; j++) {
         			companyObject[hiring[j]] = true;
         		}
-        		companyObject.computerScience = true;
+        		companyObject.computerScience = false;
         		companyObject.computerEngineering = false;
         		companyObject.electricalEngineering = false;
+        		var majors = company.profile.majors;
+        		for(var j = 0; j<majors.length; j++) {
+        			companyObject[majors[j]] = true;
+        		}
         		newArr.push(companyObject);
       		}
 			res.send(newArr);
 		});
 	});
+
 	app.post('/CompanyProfile', isLoggedIn, isRec, (req, res) => {
 		User.findOne({'Recruiter.companyLogin' :req.user.Recruiter.companyLogin}, (err, user) => {
 			if(err)
@@ -125,6 +132,7 @@ module.exports = (app, passport) => {
 			user.profile.description = req.body.description;
 			user.profile.lookingFor = req.body.lookingFor;
 			user.profile.hiring = req.body.hiring;
+			user.profile.majors = req.body.majors;
 			
 			if(req.body.sponsers == 'Yes')
 				user.profile.sponsers = true;
@@ -135,7 +143,7 @@ module.exports = (app, passport) => {
 			user.save((err) => {
 				if(err)
 					res.send(err);
-				res.redirect('/recmain');
+				res.redirect('/recmain')
 			});
 		});
 	});

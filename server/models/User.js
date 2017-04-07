@@ -24,11 +24,13 @@ const userSchema = mongoose.Schema({
         opType              : String,
         sponsorship         : Boolean,
         resume              : String,
+        
 
         //Company properties
         description         : String,
         lookingFor          : [String],
         hiring              : [String],
+        majors              : [String],
         sponsers            : Boolean,
         timePer             : String
     }

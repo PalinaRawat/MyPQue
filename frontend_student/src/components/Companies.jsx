@@ -3,6 +3,7 @@ import Post from './Post';
 import '../css/Companies.css';
 import Checkbox from 'material-ui/Checkbox';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import axios from 'axios';
 
 class ProductRow extends React.Component {
   render() {
@@ -23,23 +24,23 @@ class ProductTable extends React.Component {
 
     //console.log(this.props.inStockOnly)
     //console.log(this.props.international);
-    console.log(this.props.fullTime);
+    console.log(this.props.FullTime);
     this.props.products.forEach((product) => {
       if (!product.SponsoringVisa && this.props.international) {
         return;
       } else if (!product.stocked && this.props.inStockOnly) {
         return;
-      } else if (!product.fullTime && this.props.fullTime) {
+      } else if (!product.FullTime && this.props.FullTime) {
         return;
-      } else if (!product.internship && this.props.internship) {
+      } else if (!product.Internships && this.props.Internships) {
         return;
-      } else if (!product.freshman && this.props.freshman) {
+      } else if (!product.Freshman && this.props.Freshman) {
         return;
-      } else if (!product.sophomore && this.props.sophomore) {
+      } else if (!product.Sophomore && this.props.Sophomore) {
         return;
-      } else if (!product.junior && this.props.junior) {
+      } else if (!product.Junior && this.props.Junior) {
         return;
-      } else if (!product.senior && this.props.senior) {
+      } else if (!product.Senior && this.props.Senior) {
         return;
       } else if (!product.computerScience && this.props.computerScience) {
         return;
@@ -152,7 +153,7 @@ class SearchBar extends React.Component {
 
     <input
       type="checkbox"
-      checked={this.props.freshman}
+      checked={this.props.Freshman}
       onChange={this.handleFreshmanChange}
     />
     <label >Hiring Freshmen</label >
@@ -161,7 +162,7 @@ class SearchBar extends React.Component {
 
   <input
     type="checkbox"
-    checked={this.props.sophomore}
+    checked={this.props.Sophomore}
     onChange={this.handleSophomoreChange}
   />
    <label >Hiring Sophomores</label >
@@ -170,7 +171,7 @@ class SearchBar extends React.Component {
 
 <input
   type="checkbox"
-  checked={this.props.junior}
+  checked={this.props.Junior}
   onChange={this.handleJuniorChange}
 />
 <label >Hiring Juniors</label >
@@ -178,7 +179,7 @@ class SearchBar extends React.Component {
 
 <input
   type="checkbox"
-  checked={this.props.senior}
+  checked={this.props.Senior}
   onChange={this.handleSeniorChange}
 />
 <label >Hiring Seniors</label >
@@ -230,16 +231,16 @@ class SearchBar extends React.Component {
 
    <input
      type="checkbox"
-     checked={this.props.fullTime}
+     checked={this.props.FullTime}
      onChange={this.handleFullTimeChange}
    />
-    <label id="fullTime">Full Time </label >
+    <label id="FullTime">Full Time </label >
 
 
 
  <input
    type="checkbox"
-   checked={this.props.internship}
+   checked={this.props.Internships}
    onChange={this.handleInternshipChange}
  />
  <label >Internship</label >
@@ -256,12 +257,12 @@ class FilterableProductTable extends React.Component {
     this.state = {
       inStockOnly: false,
       international: false,
-      fullTime: false,
-      internship: false,
-      freshman: false,
-      sophomore: false,
-      junior: false,
-      senior: false,
+      FullTime: false,
+      Internships: false,
+      Freshman: false,
+      Sophomore: false,
+      Junior: false,
+      Senior: false,
       computerScience: false,
       computerEngineering: false,
       electricalEngineering: false
@@ -281,8 +282,6 @@ class FilterableProductTable extends React.Component {
     this.handleElectricalEngineering = this.handleElectricalEngineering.bind(this);
   }
 
-
-
   handleInStockInput(inStockOnly) {
     this.setState({
       inStockOnly: inStockOnly
@@ -295,39 +294,39 @@ class FilterableProductTable extends React.Component {
     })
   }
 
-  handleFullTime(fullTime) {
+  handleFullTime(FullTime) {
     this.setState({
-      fullTime: fullTime
+      FullTime: FullTime
     })
   }
 
-  handleInternship(internship) {
+  handleInternship(Internships) {
     this.setState({
-      internship: internship
+      Internships: Internships
     })
   }
 
-  handleFreshman(freshman) {
+  handleFreshman(Freshman) {
     this.setState({
-      freshman: freshman
+      Freshman: Freshman
     })
   }
 
-  handleSophomore(sophomore) {
+  handleSophomore(Sophomore) {
     this.setState({
-      sophomore: sophomore
+      Sophomore: Sophomore
     })
   }
 
-  handleJunior(junior) {
+  handleJunior(Junior) {
     this.setState({
-      junior: junior
+      Junior: Junior
     })
   }
 
-  handleSenior(senior) {
+  handleSenior(Senior) {
     this.setState({
-      senior: senior
+      Senior: Senior
     })
   }
 
@@ -354,13 +353,13 @@ class FilterableProductTable extends React.Component {
       <div>
         <SearchBar
           inStockOnly={this.state.inStockOnly}
-          fullTime={this.state.fullTime}
+          FullTime={this.state.FullTime}
           international={this.state.international}
-          internship={this.state.internship}
-          freshman={this.state.freshman}
-          sophomore={this.state.sophomore}
-          junior={this.state.junior}
-          senior={this.state.senior}
+          Internships={this.state.Internships}
+          Freshman={this.state.Freshman}
+          Sophomore={this.state.Sophomore}
+          Junior={this.state.Junior}
+          Senior={this.state.Senior}
           computerScience={this.state.computerScience}
           computerEngineering={this.state.computerEngineering}
           electricalEngineering={this.state.electricalEngineering}
@@ -380,12 +379,12 @@ class FilterableProductTable extends React.Component {
           products={this.props.products}
           inStockOnly={this.state.inStockOnly}
           international={this.state.international}
-          fullTime={this.state.fullTime}
-          internship={this.state.internship}
-          freshman={this.state.freshman}
-          sophomore={this.state.sophomore}
-          junior={this.state.junior}
-          senior={this.state.senior}
+          FullTime={this.state.FullTime}
+          Internships={this.state.Internships}
+          Freshman={this.state.Freshman}
+          Sophomore={this.state.Sophomore}
+          Junior={this.state.Junior}
+          Senior={this.state.Senior}
           computerScience={this.state.computerScience}
           computerEngineering={this.state.computerEngineering}
           electricalEngineering={this.state.electricalEngineering}
@@ -395,29 +394,17 @@ class FilterableProductTable extends React.Component {
   }
 }
 
-
-/*var PRODUCTS = [
-  {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
-  {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball'},
-  {category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball'},
-  {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch'},
-  {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
-  {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
-];*/
-
 var PRODUCTS = [
 {
          Name: 'Facebook',
          Description: 'HEllo',
-         Hiring: 'Freshman',
          SponsoringVisa: 'Freshman',
-         stocked: false,
-         fullTime: true,
-         internship: true,
-         freshman: true,
-         sophomore: true,
-         junior: true,
-         senior: true,
+         FullTime: true,
+         Internships: true,
+         Freshman: true,
+         Sophomore: true,
+         Junior: true,
+         Senior: true,
          computerScience: true,
          computerEngineering: true,
          electricalEngineering: true,
@@ -426,15 +413,13 @@ var PRODUCTS = [
       {
          Name: 'Google',
          Description: '123',
-         Hiring: 'Freshman',
          SponsoringVisa: false,
-         stocked: true,
-         fullTime: false,
-         internship: true,
-         freshman: true,
-         sophomore: true,
-         junior: false,
-         senior: false,
+         FullTime: false,
+         Internships: true,
+         Freshman: true,
+         Sophomore: true,
+         Junior: false,
+         Senior: false,
          computerScience: true,
          computerEngineering: false,
          electricalEngineering: true
@@ -443,15 +428,13 @@ var PRODUCTS = [
       {
          Name: 'Microsoft',
          Description: '234234',
-         Hiring: 'Sophomore',
          SponsoringVisa: true,
-         stocked: true,
-         fullTime: false,
-         internship: true,
-         freshman: true,
-         sophomore: true,
-         junior: true,
-         senior: false,
+         FullTime: false,
+         Internships: true,
+         Freshman: true,
+         Sophomore: true,
+         Junior: true,
+         Senior: false,
          computerScience: false,
          computerEngineering: true,
          electricalEngineering: true
@@ -462,11 +445,26 @@ var PRODUCTS = [
 
 
 export default class Companies extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      companies: []
+    };
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:3000/Companies').then(res => {
+      var companies = res.data;
+      console.log(companies);
+      this.setState({companies});
+    })
+  }
+
   render() {
     return (
 
 
-       <FilterableProductTable products={PRODUCTS} />
+       <FilterableProductTable products={this.state.companies} />
 
 
 

@@ -39,11 +39,11 @@ module.exports = (app, passport) => {
 	});
 
 	app.get('/main', isLoggedIn, hasProfile, isStudent, (req, res)=> {
-		res.send('logged in student succesfull as '+req.user.local.firstName);
+		res.sendFile(path.join(__dirname+'/../public/frontend_login/index.html'));
 	});
 
 	app.get('/recmain', isLoggedIn, hasCompanyProfile, isRec, (req, res) => {
-		res.send('logged in recruiter succesfull as '+req.user.Recruiter.companyName);
+		res.sendFile(path.join(__dirname+'/../public/frontend_recruiter/index.html'));
 	});
 
 	app.get('/student', isLoggedIn, isStudent, (req, res) => {
@@ -79,17 +79,51 @@ module.exports = (app, passport) => {
 			});
 		});
 	});
+	app.get('/Companies', (req, res) =>  {
+		console.log('test companies route');
+		User.find({'Recruiter.isRec' : true}, (err, companies) => {
+			
+			if(err)
+				res.send(err);
 
+			var newArr = [];
+			for(var i = 0; i<companies.length; i++) {
+        		var company = companies[i];
+        		var companyObject = new Object();
+        		companyObject.Name = company.Recruiter.companyName;
+        		companyObject.Description = company.profile.description;
+        		companyObject.SponseringVisa = company.profile.sponsers;
+
+        		companyObject.Freshman = false;
+        		companyObject.Sophomore = false;
+        		companyObject.Junior = false;
+        		companyObject.Senior = false;
+
+        		var lookingfor = company.profile.lookingFor;
+        		for(var j = 0; j<lookingfor.length; j++) {
+        			companyObject[lookingfor[j]] = true;
+        		}
+        		companyObject.FullTime = false;
+        		companyObject.Internships = false;
+
+        		var hiring = company.profile.hiring;
+        		for(var j = 0; j<hiring.length; j++) {
+        			companyObject[hiring[j]] = true;
+        		}
+        		companyObject.computerScience = true;
+        		companyObject.computerEngineering = false;
+        		companyObject.electricalEngineering = false;
+        		newArr.push(companyObject);
+      		}
+			res.send(newArr);
+		});
+	});
 	app.post('/CompanyProfile', isLoggedIn, isRec, (req, res) => {
 		User.findOne({'Recruiter.companyLogin' :req.user.Recruiter.companyLogin}, (err, user) => {
 			if(err)
 				res.send(err);
-			console.log(req.body.description);
 			user.profile.description = req.body.description;
-			console.log(req.body.lookingFor);
-			console.log(req.body.hiring);
 			user.profile.lookingFor = req.body.lookingFor;
-
 			user.profile.hiring = req.body.hiring;
 			
 			if(req.body.sponsers == 'Yes')

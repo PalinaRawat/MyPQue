@@ -27,8 +27,8 @@ const userSchema = mongoose.Schema({
 
         //Company properties
         description         : String,
-        lookingFor          : String,
-        hiring              : String,
+        lookingFor          : [String],
+        hiring              : [String],
         sponsers            : Boolean,
         timePer             : String
     }

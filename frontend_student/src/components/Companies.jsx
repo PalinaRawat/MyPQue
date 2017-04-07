@@ -66,7 +66,7 @@ const styles = {
     maxWidth: 150,
     display: 'flex',
     flexDirection: 'row',
-    marginLeft: '50px',
+    marginLeft: '40px',
 
   },
   checkbox: {
@@ -137,115 +137,77 @@ class SearchBar extends React.Component {
   render() {
     return (
 
+   <form>
+      
+
+       <MuiThemeProvider>
+          <div className="Checkbox" style={styles.block}>
+            <Checkbox 
+              name = "hiring"
+              label="Hiring Freshmen"
+              checked={this.props.Freshman}
+              onCheck={this.handleFreshmanChange}
+              style={styles.checkbox} />
+            <Checkbox 
+              name = "hiring"
+              label="Hiring Sophomores"
+              checked={this.props.Sophomore}
+              onCheck={this.handleSophomoreChange}
+              style={styles.checkbox} />
+            <Checkbox 
+              name = "hiring"
+              label="Hiring Juniors"
+              checked={this.props.Junior}
+              onCheck={this.handleJuniorChange}
+              style={styles.checkbox} />
+            <Checkbox 
+              name = "hiring"
+              label="Hiring Seniors"
+              checked={this.props.Senior}
+              onCheck={this.handleSeniorChange}
+              style={styles.checkbox} />
+            <Checkbox
+              name="major" 
+              label="Computer Science"
+              checked={this.props.computerScience}
+              onCheck={this.handleComputerScienceChange}
+              style={styles.checkbox} />
+            <Checkbox 
+              major="major"
+              label="Computer Engineering"
+              checked={this.props.computerEngineering}
+              onCheck={this.handleComputerEngineeringChange}
+              style={styles.checkbox} />
+            <Checkbox 
+              name="major"
+              label="Electrical Engineering"
+              checked={this.props.electricalEngineering}
+              onCheck={this.handleElectricalEngineeringChange}
+              style={styles.checkbox} />
+            <Checkbox 
+              name="visa"
+              label="Sponsoring Visa"
+              checked={this.props.international}
+              onCheck={this.handleInternationalChange}
+              style={styles.checkbox} />
+            <Checkbox 
+              name="lookingFor"
+              label="Full-time"
+              checked={this.props.FullTime}
+              onCheck={this.handleFullTimeChange}
+              style={styles.checkbox} />
+            <Checkbox 
+              name="lookingFor"
+              label="Internship"
+              checked={this.props.Internships}
+              onCheck={this.handleInternshipChange}
+              style={styles.checkbox} />
+            </div>
+
+            </MuiThemeProvider>
+  
 
 
-       <form>
-       <div className="checkboxes">
-
-
-
-
-
-    <div id="lineOne">
-      <br></br>
-
-
-
-    <input
-      type="checkbox"
-      checked={this.props.Freshman}
-      onChange={this.handleFreshmanChange}
-    />
-    <label >Hiring Freshmen</label >
-
-
-
-  <input
-    type="checkbox"
-    checked={this.props.Sophomore}
-    onChange={this.handleSophomoreChange}
-  />
-   <label >Hiring Sophomores</label >
-
-
-
-<input
-  type="checkbox"
-  checked={this.props.Junior}
-  onChange={this.handleJuniorChange}
-/>
-<label >Hiring Juniors</label >
-
-
-<input
-  type="checkbox"
-  checked={this.props.Senior}
-  onChange={this.handleSeniorChange}
-/>
-<label >Hiring Seniors</label >
-
-</div>
-
-<div id="lineTwo">
-  <br></br>
-
-<input
-  type="checkbox"
-  checked={this.props.computerScience}
-  onChange={this.handleComputerScienceChange}
-/>
-<label >Computer Science </label >
-
-
-
-<input
-  type="checkbox"
-  checked={this.props.computerEngineering}
-  onChange={this.handleComputerEngineeringChange}
-/>
-<label >Computer Engineering</label >
-
-
-<input
-  type="checkbox"
-  checked={this.props.electricalEngineering}
-  onChange={this.handleElectricalEngineeringChange}
-/>
-
-<label >Electrical Engineering </label >
-
-      </div>
-    </div>
-
-    <div id="lineThree">
-      <br></br>
-
-     <input
-       type="checkbox"
-       checked={this.props.international}
-       onChange={this.handleInternationalChange}
-     />
-     <label id="visa">Sponsoring Visa</label>
-
-
-
-   <input
-     type="checkbox"
-     checked={this.props.FullTime}
-     onChange={this.handleFullTimeChange}
-   />
-    <label id="FullTime">Full Time </label >
-
-
-
- <input
-   type="checkbox"
-   checked={this.props.Internships}
-   onChange={this.handleInternshipChange}
- />
- <label >Internship</label >
-
-</div>
       </form>
     );
   }

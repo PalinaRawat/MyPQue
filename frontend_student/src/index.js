@@ -29,7 +29,7 @@ ReactDOM.render((
    <HashRouter>
       
       <App>
-        <Route exact path="/" component={Companies} />
+        <Route exact path="/" component={Profile} />
         <Route path="/Profile" component={Profile} />
         <Route path="/Companies" component={Companies} />
       </App>

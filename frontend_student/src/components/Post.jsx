@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
 import DropDownMenu from 'material-ui/DropDownMenu';
+import Checkbox from 'material-ui/Checkbox';
+import ActionFavorite from 'material-ui/svg-icons/action/favorite';
+import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 import MenuItem from 'material-ui/MenuItem';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import '../css/Post.css';
+
+
+
+const styles = {
+  block: {
+    maxWidth: 250,
+  },
+  checkbox: {
+    marginBottom: 16,
+  },
+};
+
+
 class Post extends Component {
+	
 
-	constructor(props) {
-    super(props);
-    this.state = {value: 1};
-  }
-
-  handleChange = (event, index, value) => this.setState({value});
 	render() {
 	
 		return(
@@ -26,6 +37,26 @@ class Post extends Component {
 
 					</div>
 					<MuiThemeProvider>
+					<Checkbox
+      					checkedIcon={<ActionFavorite />}
+      					uncheckedIcon={<ActionFavoriteBorder />}
+      					label="Select"
+     					style={styles.checkbox}
+    				/>
+      				</MuiThemeProvider>
+			</div>
+
+		);
+	}
+}
+export default Post;
+
+
+
+/*
+
+</div>
+					<MuiThemeProvider>
 					<DropDownMenu 
 						value={this.state.value}
 	          			onChange={this.handleChange}
@@ -40,7 +71,4 @@ class Post extends Component {
       				</MuiThemeProvider>
 			</div>
 
-		);
-	}
-}
-export default Post;
+*/

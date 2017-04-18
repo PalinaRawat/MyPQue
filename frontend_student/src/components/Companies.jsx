@@ -418,7 +418,7 @@ export default class Companies extends Component {
     axios.get('http://localhost:3000/Companies')
     .then(res => {
       console.log(res.data);
-      var companies = res.data;
+      var companies = res.data; 
       console.log(companies);
       this.setState({companies});
     })
@@ -432,12 +432,7 @@ export default class Companies extends Component {
 
   render() {
     return (
-
-
        <FilterableProductTable products={this.state.companies} />
-
-
-
     );
   }
 }

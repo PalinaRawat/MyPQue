@@ -415,11 +415,19 @@ export default class Companies extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3000/Companies').then(res => {
+    axios.get('http://localhost:3000/Companies')
+    .then(res => {
+      console.log(res.data);
       var companies = res.data;
       console.log(companies);
       this.setState({companies});
     })
+    .catch((error) => {
+      //error getting data from server load products array for dev purposes
+      var companies = PRODUCTS;
+      this.setState({companies});
+    });
+
   }
 
   render() {

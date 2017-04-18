@@ -38,6 +38,9 @@ module.exports = (passport) => {
 
 					user.local.firstName = req.body.firstName;
 					user.local.lastName = req.body.lastName;
+					if(!req.body.email.includes(".purdue.edu")) {
+						return done(null, false, req.flash('signupMessage', "this is an invalid email address"));
+					}
 					user.local.email = req.body.email;
 					user.local.password = user.generateHash(password);
 					user.Recruiter.isRec = false;

@@ -5,25 +5,9 @@ import Checkbox from 'material-ui/Checkbox';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import axios from 'axios';
 
-class ProductRow extends React.Component {
-  render() {
-
-    return (
-      <div className="aa">
-        <div className="aa">
-         <Post Name={this.props.product.Name} Description={this.props.product.Description}  />
-         </div>
-      </div>
-    );
-  }
-}
-
 class ProductTable extends React.Component {
   render() {
     var rows = [];
-
-    //console.log(this.props.inStockOnly)
-    //console.log(this.props.international);
     console.log(this.props.FullTime);
     this.props.products.forEach((product) => {
       if (!product.SponsoringVisa && this.props.international) {
@@ -49,9 +33,8 @@ class ProductTable extends React.Component {
       } else if (!product.electricalEngineering && this.props.electricalEngineering) {
         return;
       }
-
-      rows.push(<ProductRow product={product} key={product.Name} />);
-
+      
+      rows.push(<Post Name={product.Name} key={product.Name} Description={product.Description}/>);
     });
     return (
       <table>

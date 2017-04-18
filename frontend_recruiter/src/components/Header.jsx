@@ -53,7 +53,7 @@ export default class Header extends Component {
   		/>
 		</MuiThemeProvider>
 	 	<MuiThemeProvider muiTheme={muiTheme} >
-        <Drawer width={200} openPrimary={true} width={200} open={this.state.open} >
+        <Drawer width={200} openPrimary={true} width={200} open={this.state.open} onTouchTap={this.handleToggle} >
         	<MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
           	<AppBar iconElementLeft={<IconButton><img src={logo} className="App-logo" alt="logo" /></IconButton>} onTouchTap={this.handleToggle}/>
             </MuiThemeProvider>
@@ -64,14 +64,18 @@ export default class Header extends Component {
 
               <MenuItem
               primaryText="Company Profile"
+              onTouchTap={this.handleToggle}
               containerElement={<Link to="Profile" />}
+
               />
               <MenuItem
                primaryText="Current Queue"
+               onTouchTap={this.handleToggle}
                containerElement={<Link to="Queue" />}
                />
                <MenuItem
                  primaryText="List of Students"
+                 onTouchTap={this.handleToggle}
                  containerElement={<Link to="Students" />}
                />
             </Menu>

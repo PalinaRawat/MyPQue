@@ -3,9 +3,11 @@ import Post from './Post';
 import PostSpeaking from './PostSpeaking';
 import Checkbox from 'material-ui/Checkbox';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import RaisedButton from 'material-ui/RaisedButton';
 
-
-
+const style = {
+  margin: 12,
+};
 
 var data = [
       {
@@ -124,16 +126,18 @@ export default class Profile extends Component {
 				</div>
 
 				<div id="speakingDiv">
-					<br></br>
+					
 				{mappedSpeaking}
-				<br></br>
+
 				</div>
 				<hr></hr>
 				<div>
 					<p className="mui--text-center">Queue of remaining students</p>
-					<br></br>
 				</div>
 				<div id="queueDiv">
+					<MuiThemeProvider>
+	          <RaisedButton label="Dequeue" type="submit" primary={true} style={style} />
+	        </MuiThemeProvider>
 				{mapped}
 				</div>
 

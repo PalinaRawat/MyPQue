@@ -14,11 +14,11 @@ public class Driver {
     //ArrayList<Student> students;
 
 
-    //Student Methods
-
+    /**  Akshat your code is commented out down here ( You have got to work on your spelling mistakes btw -.- )**/
+ /*
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("create")
+    @Path("/create")
+    @Consumes(MediaType.APPLICATION_JSON)
     public boolean createPreferences(@QueryParam(value = "stud") int id,  @QueryParam(value = "comp") List<Integer> comps) {
         Student s2 = new Student(id, "", "", "", null, id, "");
         students.put(id, s2);
@@ -29,10 +29,66 @@ public class Driver {
         }
         return s2.createPrefernces(com);
     }
+*/
+    //Student Methods
+
+    /**
+     * Apparently FormParam only parses strings which I found after hours of debugging and innovation
+     * So this method takes the json fields as strings, parses them accordingly int & list<integer> and etc etc...
+     *
+     * @return - should be true/false according to whether preferences are successfully created
+     * */
+    @POST
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Path("/create")
+    public boolean create(@FormParam("key1") String string_id, @FormParam("key2") String comps){
+        boolean debug = true;
+        int id = Integer.parseInt(string_id);
+
+        comps = comps.substring(1,comps.length()-1);
+        if (debug)
+            System.out.println(comps);
+        String[] arr = comps.split(",");
+        List<Integer> list = new ArrayList<Integer>();
+        for (int i = 0; i < arr.length; i++) {
+            list.add(i, Integer.parseInt(arr[i]));
+        }
+        Student s2 = new Student(id, "", "", "", null, id, "");
+        students.put(id, s2);
+        Student.sets(students);
+        Company com[] = new Company[list.size()];
+        for (int j = 0; j < list.size(); j++) {
+            com[j] = companies.get(list.get(j));
+            if (debug)
+                System.out.println(com[j]);
+        }
+
+        /**
+         * @TODO: companies.get(i) or even companies.containsKey(1) gives error values for some wierd reason O_o Resolve this
+         *
+         * method throws a nullpointerexception as a result.
+         */
+
+        return s2.createPrefernces(com);
+    }
+
+    /**
+     * Dummy POST handling Method
+     * */
+    /*@POST @Consumes("application/x-www-form-urlencoded")
+    @Path("/create")
+    public boolean create(final MultivaluedMap<String, String> formParams) {
+        for (String key : formParams.keySet()) {
+            System.out.println(key + ": " + formParams.get(key));
+        }
+
+        return false;
+    }*/
+
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("gettime")
+    @Path("/gettime")
     public QueuePosition[] getOreferences(@QueryParam(value = "stud") int id) {
         return students.get(id).getQueuePositions();
     }

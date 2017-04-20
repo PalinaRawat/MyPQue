@@ -1,5 +1,7 @@
-import java.awt.event.ComponentAdapter;
+import sun.font.ScriptRun;
+
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 /**
  * Created by akshatgoyal on 3/30/17.
@@ -11,13 +13,13 @@ enum Standings {
 
 public class Student {
 
-    static ArrayList<Student> s;
-    static ArrayList<Company> c;
+    static Hashtable<Integer, Student> s;
+    static Hashtable<Integer, Company> c;
 
-    public static void sets(ArrayList<Student> stud) {
+    public static void sets(Hashtable<Integer, Student> stud) {
         s = stud;
     }
-    public static void setc(ArrayList<Company> comp) {
+    public static void setc(Hashtable<Integer, Company> comp) {
         c = comp;
     }
 
@@ -126,21 +128,27 @@ public class Student {
 
     public static Company getCompany(int id) {
         // return new Company(id);
-        for (Company company: c) {
-            if(company.getCompanyID() == id)
-                return company;
-        }
-        System.out.println("error2 : no company");
-        return null;
+
+        return c.get(id);
+
+//        for (Company company: c) {
+//            if(company.getCompanyID() == id)
+//                return company;
+//        }
+//        System.out.println("error2 : no company");
+//        return null;
     }
 
     public static Student getStudent(int ID){
-        for (Student student: s) {
-            if(student.getID() == ID)
-                return student;
-        }
-        System.out.println("error1 : no student");
-        return null;
+
+        return s.get(ID);
+
+//        for (Student student: s) {
+//            if(student.getID() == ID)
+//                return student;
+//        }
+//        System.out.println("error1 : no student");
+//        return null;
     }
 
     /**

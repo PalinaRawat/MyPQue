@@ -1,16 +1,46 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import java.util.*;
+
 
 /**
  * Created by akshatgoyal on 4/3/17.
  */
+@Path("server")
 public class Driver {
-    static ArrayList<Company> companies;
-    static ArrayList<Student> students;
+    //ArrayList<Company> companies;
+    static Hashtable<Integer, Company> companies;
+    static Hashtable<Integer, Student> students;
+    //ArrayList<Student> students;
 
-    public static void main(String[] args) {
+
+    //Student Methods
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("create")
+    public boolean createPreferences(@QueryParam(value = "stud") int id,  @QueryParam(value = "comp") List<Integer> comps) {
+        Student s2 = new Student(id, "", "", "", null, id, "");
+        students.put(id, s2);
+        Student.sets(students);
+        Company com[] = new Company[comps.size()];
+        for (int j = 0; j < comps.size(); j++) {
+            com[j] = companies.get(comps.get(j));
+        }
+        return s2.createPrefernces(com);
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("gettime")
+    public QueuePosition[] getOreferences(@QueryParam(value = "stud") int id) {
+        return students.get(id).getQueuePositions();
+    }
+
+
+    /*public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        companies = new ArrayList<>();
+        companies = new ArrayList<Company>();
 
         System.out.println("Enter number of comapnies");
         int num_companies = scan.nextInt();
@@ -22,7 +52,7 @@ public class Driver {
         int num_students = scan.nextInt();
         System.out.println("Enter students");
 
-        students = new ArrayList<>();
+        students = new ArrayList<Student>();
         for (int i = 0; i < num_students; i++) {
             students.add(new Student(100 + i, "", "", "", null, i, ""));
         }
@@ -101,5 +131,5 @@ public class Driver {
             }
         }
 
-    }
+    }*/
 }

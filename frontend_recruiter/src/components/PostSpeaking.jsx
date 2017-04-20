@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import '../css/Post.css';
-class Post extends Component {
+import '../css/PostSpeaking.css';
+class PostSpeaking extends Component {
 
 	constructor(props) {
     super(props);
@@ -14,8 +14,9 @@ class Post extends Component {
 	render() {
 
 		return(
-			<div className="Post" id="Queue">
-					<div className="Tab">
+
+			<div className="Post" >
+					<div className="Tab" id="Speaking" >
 						<div className="firstName">
 							{this.props.firstName}
 						</div>
@@ -31,7 +32,8 @@ class Post extends Component {
         </div>
       </div>
 
+
 		);
 	}
 }
-export default Post;
+export default PostSpeaking;

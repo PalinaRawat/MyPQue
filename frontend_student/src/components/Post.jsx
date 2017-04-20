@@ -20,10 +20,7 @@ const styles = {
 
 
 class Post extends Component {
-	
-
 	render() {
-	
 		return(
 			<div className="Post">
 					<div className="Tab">
@@ -42,6 +39,7 @@ class Post extends Component {
       					uncheckedIcon={<ActionFavoriteBorder />}
       					label="Select"
      					style={styles.checkbox}
+     					onCheck={() => this.props.onClick()}
     				/>
       				</MuiThemeProvider>
 			</div>

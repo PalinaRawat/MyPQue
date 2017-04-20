@@ -1,15 +1,39 @@
+//npm libraries
 import React, { Component } from 'react';
-import Post from './Post';
-import '../css/Companies.css';
-import Checkbox from 'material-ui/Checkbox';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import axios from 'axios';
 
+//local dependenices
+import Post from './Post';
+import '../css/Companies.css';
+
+//material ui components
+import Checkbox from 'material-ui/Checkbox';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog';
+
 class ProductTable extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      favorited: []
+    };
+  }
+  handleClick(i) {
+    //gives a shallow copy of the favorited array
+    const favorites = this.state.favorited.slice();
+    if(favorites[i] == null)
+      favorites[i] = true;
+    else
+      favorites[i] = !favorites[i];
+    this.setState({favorited: favorites});
+    this.props.onClick(favorites);
+  }
   render() {
     var rows = [];
-    console.log(this.props.FullTime);
-    this.props.products.forEach((product) => {
+    this.props.products.forEach((product, index) => {
       if (!product.SponsoringVisa && this.props.international) {
         return;
       } else if (!product.stocked && this.props.inStockOnly) {
@@ -33,13 +57,13 @@ class ProductTable extends React.Component {
       } else if (!product.electricalEngineering && this.props.electricalEngineering) {
         return;
       }
-      
-      rows.push(<Post Name={product.Name} key={product.Name} Description={product.Description}/>);
+
+      rows.push(<Post Name={product.Name} key={product.Name} Description={product.Description} onClick={() => this.handleClick(index)}/>);
     });
     return (
-      <table>
-        <tbody>{rows}</tbody>
-      </table>
+      <div>
+        {rows}
+      </div>
     );
   }
 }
@@ -187,10 +211,7 @@ class SearchBar extends React.Component {
               style={styles.checkbox} />
             </div>
 
-            </MuiThemeProvider>
-  
-
-
+        </MuiThemeProvider>
       </form>
     );
   }
@@ -210,7 +231,7 @@ class FilterableProductTable extends React.Component {
       Senior: false,
       computerScience: false,
       computerEngineering: false,
-      electricalEngineering: false
+      electricalEngineering: false,
     };
 
 
@@ -333,10 +354,18 @@ class FilterableProductTable extends React.Component {
           computerScience={this.state.computerScience}
           computerEngineering={this.state.computerEngineering}
           electricalEngineering={this.state.electricalEngineering}
+          onClick={this.props.onClick}
         />
+        <MuiThemeProvider>
+          <RaisedButton label="Submit" primary={true} style={style} onClick={() => this.props.togglePage()}/>
+        </MuiThemeProvider>
       </div>
     );
   }
+}
+
+const style = {
+  margin: 12,
 }
 
 var PRODUCTS = [
@@ -388,13 +417,31 @@ var PRODUCTS = [
       },
 ];
 
+class Test extends React.Component {
+  //IMPORTANT README BEFORE WRITING
+  //PLEASE MOVE THIS INTO A NEW FILE THIS FILE IS BECOMMING TOO BIG WE ARE ALL GONNA DIE IF ANY MORE CODE IS WRITTEN HERE K THANKS
+  //THIS COMPONENT HAS ACCESS TO THE this.props.companies which is a list of companies that the student has selected
+  render() {
+    return(
+      <div>
+        test me k thanks
+      </div>
+    );
+  }
+}
 
 export default class Companies extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      companies: []
+      companies: [],
+      selected: [],
+      hasSelected: false,
+      open: false 
     };
+    this.onClick = this.onClick.bind(this);
+    this.togglePage = this.togglePage.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   componentDidMount() {
@@ -413,9 +460,66 @@ export default class Companies extends Component {
 
   }
 
+  togglePage() {
+    //toggle selected prefrence
+    if(this.state.selected.length < 1) {
+      this.handleOpen();
+    }
+    else {
+      this.setState({hasSelected: !this.state.hasSelected});
+    }
+  }
+
+  //argument bool array
+  onClick(selected) {
+    this.setState({selected: []});
+    this.state.companies.forEach((company, index) => {
+      if(selected[index]) {
+        let arr = this.state.selected;
+        arr.push(company);
+        console.log(company);
+        this.setState({selected: arr});
+      }
+    });
+    
+  }
+
+  handleOpen() {
+    this.setState({open: true});
+  }
+  handleClose() {
+    this.setState({open: false});
+  }
+
   render() {
+    let div = null;
+    if(!this.state.hasSelected)
+      div =<FilterableProductTable products={this.state.companies} togglePage={this.togglePage} onClick={this.onClick}/>
+    else 
+      div = <Test companies={this.state.selected}/>
+
+    const actions = [
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onTouchTap={this.handleClose}
+      />,
+    ]
     return (
-       <FilterableProductTable products={this.state.companies} />
+      <div>
+        <MuiThemeProvider>
+          <Dialog
+            title="Not enought Companies selected"
+            actions={actions}
+            modal={false}
+            open={this.state.open}
+            onRequestClose={this.handleClose}
+          >
+          Must Select at least 1 company.
+        </Dialog>
+        </MuiThemeProvider>
+       {div}
+      </div>
     );
   }
 }

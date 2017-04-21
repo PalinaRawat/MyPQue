@@ -461,9 +461,9 @@ export default class Companies extends Component {
   componentDidMount() {
     axios.get('http://localhost:3000/Companies')
     .then(res => {
-      console.log(res.data);
+     // console.log(res.data);
       var companies = res.data; 
-      console.log(companies);
+     // console.log(companies);
       this.setState({companies});
     })
     .catch((error) => {
@@ -476,7 +476,7 @@ export default class Companies extends Component {
 
   togglePage() {
     //toggle selected prefrence
-    if(this.state.selected.length < 1) {
+    if(this.state.selected.length < 1 || this.state.selected.length > 5) {
       this.handleOpen();
     }
     else {
@@ -491,7 +491,7 @@ export default class Companies extends Component {
       if(selected[index]) {
         let arr = this.state.selected;
         arr.push(company);
-        console.log(company);
+       // console.log(company);
         this.setState({selected: arr});
       }
     });
@@ -523,13 +523,13 @@ export default class Companies extends Component {
       <div>
         <MuiThemeProvider>
           <Dialog
-            title="Not enought Companies selected"
+            title="Wrong number of companies selected"
             actions={actions}
             modal={false}
             open={this.state.open}
             onRequestClose={this.handleClose}
           >
-          Must Select at least 1 company.
+          Cannot select less than 1 or more than 5 companies.
         </Dialog>
         </MuiThemeProvider>
        {div}

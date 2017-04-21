@@ -8,18 +8,41 @@ class Post_rank extends Component {
 
 	constructor(props) {
     super(props);
-    this.state = {value: 2};
+    this.state = {
+    	ranked:[],
+    	value: 2
+    };
+    this.state.ranked.push({Name: this.props.Name, value: this.state.value});
   }
 
-  handleChange = (event, index, value) => this.setState({value});
+  handleChange = (event, index, value) => {
+  	this.setState({value});
+  	//this.state.ranked.push({Name: this.props.Name, value: this.state.value});
 
-  //in handle change we will push info about company name and rank 
-	render() {
+  	//this.state.ranked[this.props.Name].value = this.state.value;
+
+  	const rankes = this.state.ranked.slice();
+
+  	for (var i = 0, l = rankes.length; i < l; i++) {
+    	if (rankes[i].Name === this.props.Name) {
+        	rankes[i].value = value;
+        	break;
+    	}
+	}
+	this.setState({ranked: rankes});
+	console.log(rankes);
+  }
+
+  //in handle change we will push info about company name and rank
+  //store it in global variable, 
+
+  //when you click submit go through array and check if there is match 
+	
+     render() {
+    
 	
 		return(
 			<div className="Post">
-
-				Rank 
 					<div className="Tab">
 						<div className="Name">
 							{this.props.Name}

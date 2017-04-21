@@ -66,7 +66,10 @@ export default class Header extends Component {
                />
               <MenuItem 
               primaryText="Schedule" 
-              onTouchTap={this.handleToggle} />
+              onTouchTap={this.handleToggle} 
+              containerElement={<Link to="Schedule" />}
+              />
+
             </Menu>
             </MuiThemeProvider>
             </div>

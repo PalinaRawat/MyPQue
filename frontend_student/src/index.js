@@ -32,6 +32,7 @@ ReactDOM.render((
         <Route exact path="/" component={Profile} />
         <Route path="/Profile" component={Profile} />
         <Route path="/Companies" component={Companies} />
+    
       </App>
 
    </HashRouter>

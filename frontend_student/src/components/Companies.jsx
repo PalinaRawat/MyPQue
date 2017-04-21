@@ -4,6 +4,7 @@ import axios from 'axios';
 
 //local dependenices
 import Post from './Post';
+import Rank from './Rank';
 import '../css/Companies.css';
 
 //material ui components
@@ -73,7 +74,8 @@ const styles = {
     maxWidth: 150,
     display: 'flex',
     flexDirection: 'row',
-    marginLeft: '40px',
+    marginLeft: '250px',
+    marginTop: '30px',
 
   },
   checkbox: {
@@ -149,6 +151,7 @@ class SearchBar extends React.Component {
 
        <MuiThemeProvider>
           <div className="Checkbox" style={styles.block}>
+          <div>
             <Checkbox 
               name = "hiring"
               label="Hiring Freshmen"
@@ -173,6 +176,8 @@ class SearchBar extends React.Component {
               checked={this.props.Senior}
               onCheck={this.handleSeniorChange}
               style={styles.checkbox} />
+            </div>
+            <div>
             <Checkbox
               name="major" 
               label="Computer Science"
@@ -191,6 +196,8 @@ class SearchBar extends React.Component {
               checked={this.props.electricalEngineering}
               onCheck={this.handleElectricalEngineeringChange}
               style={styles.checkbox} />
+              </div>
+              <div>
             <Checkbox 
               name="visa"
               label="Sponsoring Visa"
@@ -209,6 +216,7 @@ class SearchBar extends React.Component {
               checked={this.props.Internships}
               onCheck={this.handleInternshipChange}
               style={styles.checkbox} />
+            </div>
             </div>
 
         </MuiThemeProvider>
@@ -357,8 +365,8 @@ class FilterableProductTable extends React.Component {
           onClick={this.props.onClick}
         />
         <MuiThemeProvider>
-          <RaisedButton label="Submit" primary={true} style={style} onClick={() => this.props.togglePage()}/>
-        </MuiThemeProvider>
+          <RaisedButton label="Submit" primary={true} style={style} onClick={() => this.props.togglePage()} />
+        </MuiThemeProvider> 
       </div>
     );
   }
@@ -417,10 +425,16 @@ var PRODUCTS = [
       },
 ];
 
-class Test extends React.Component {
+/*class Test extends React.Component {
   //IMPORTANT README BEFORE WRITING
   //PLEASE MOVE THIS INTO A NEW FILE THIS FILE IS BECOMMING TOO BIG WE ARE ALL GONNA DIE IF ANY MORE CODE IS WRITTEN HERE K THANKS
   //THIS COMPONENT HAS ACCESS TO THE this.props.companies which is a list of companies that the student has selected
+
+  constructor(props) {
+    super(props);
+    console.log('test props');
+    console.log(this.props.companies);
+  }
   render() {
     return(
       <div>
@@ -428,7 +442,7 @@ class Test extends React.Component {
       </div>
     );
   }
-}
+}*/
 
 export default class Companies extends Component {
   constructor(props) {
@@ -496,7 +510,7 @@ export default class Companies extends Component {
     if(!this.state.hasSelected)
       div =<FilterableProductTable products={this.state.companies} togglePage={this.togglePage} onClick={this.onClick}/>
     else 
-      div = <Test companies={this.state.selected}/>
+      div = <Rank companies={this.state.selected}/>
 
     const actions = [
       <FlatButton

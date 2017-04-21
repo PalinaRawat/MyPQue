@@ -91,28 +91,52 @@ export default class Profile extends Component {
 
 	constructor(props) {
     super(props);
-    this.state = {value: 1};
+    this.state = {
+      value: 1,
+      currentlySpeaking: [],
+      inqueue: []
+    };
   }
 
-  handleChange = (event, index, value) => this.setState({value});
+  componentDidMount() {
+    //do stuff with axios
+
+    this.setState({inqueue: data});
+    this.setState({currentlySpeaking: dataSpeaking})
+  }
+
+  updateUser(index) {
+    let arr = this.state.currentlySpeaking;
+    arr.splice(index,1);
+    this.setState({currentlySpeaking: arr});
+  }
+
+  dequeueUser() {
+    let arrOne = this.state.inqueue;
+    dataSpeaking.push(arrOne[0]);
+    arrOne.shift();
+    this.setState({inqueue: arrOne});
+  }
 
   render() {
-
-		let mappedSpeaking = dataSpeaking.map((tableItem, j) => {
+		let mappedSpeaking = this.state.currentlySpeaking.map((tableItem, j) => {
 			return (
 				<PostSpeaking key={j} firstName={"First Name: " + tableItem.firstName}
 					lastName={"Last Name: " + tableItem.lastName}
-					link={"Resume: " + tableItem.link}  />
+					link={"Resume: " + tableItem.link}
+          updateUser = {() => this.updateUser(j)}
+        />
 			);
 		})
 
-		let mapped = data.map((tableItem, i) => {
+		let mapped = this.state.inqueue.map((tableItem, i) => {
 			return(
         //should display filtered
 				<Post key={i} firstName={"First Name: " + tableItem.firstName}
           lastName={"Last Name: " + tableItem.lastName}
-          link={"Resume: " + tableItem.link}  />
+          link={"Resume: " + tableItem.link}
 
+      />
 			);
 		})
 
@@ -126,17 +150,17 @@ export default class Profile extends Component {
 				</div>
 
 				<div id="speakingDiv">
-					
+					<br></br>
 				{mappedSpeaking}
 
 				</div>
 				<hr></hr>
 				<div>
-					<p className="mui--text-center">Queue of remaining students</p>
+					<p className="mui--text-center">Queue of remaining  students</p>
 				</div>
 				<div id="queueDiv">
 					<MuiThemeProvider>
-	          <RaisedButton label="Dequeue" type="submit" primary={true} style={style} />
+	          <RaisedButton  label="Dequeue" type="submit" primary={true} style={style} onClick={() => this.dequeueUser()} />
 	        </MuiThemeProvider>
 				{mapped}
 				</div>

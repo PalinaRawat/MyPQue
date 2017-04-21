@@ -3,6 +3,13 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import '../css/PostSpeaking.css';
+import RaisedButton from 'material-ui/RaisedButton';
+
+const style = {
+  margin: 12,
+};
+
+
 class PostSpeaking extends Component {
 
 	constructor(props) {
@@ -30,6 +37,12 @@ class PostSpeaking extends Component {
 			    </div>
 
         </div>
+				<div>
+				<MuiThemeProvider>
+					<RaisedButton  label="Update" type="submit" primary={true} style={style} onClick={() => this.props.updateUser(	)} />
+				</MuiThemeProvider>
+				{/*<button onClick={() => this.props.updateUser(	)}>Update</button>*/}
+			</div>
       </div>
 
 

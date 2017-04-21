@@ -14,7 +14,7 @@ public class Driver {
 
     static Hashtable<String, Company> companies;
     static Hashtable<String, Student> students;
-    
+
     //Student Methods
 
     /**

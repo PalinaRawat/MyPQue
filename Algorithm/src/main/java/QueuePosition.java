@@ -6,24 +6,24 @@ import java.util.Hashtable;
  */
 public class QueuePosition {
 
-    public static Hashtable<Integer, Company> c;
-    public static Hashtable<Integer, Student> s;
+    public static Hashtable<String, Company> c;
+    public static Hashtable<String, Student> s;
 
-    public static void sets(Hashtable<Integer, Student> stud){
+    public static void sets(Hashtable<String, Student> stud){
         s = stud;
     }
-    public static void setc(Hashtable<Integer, Company> comp){
+    public static void setc(Hashtable<String, Company> comp){
         c = comp;
     }
 
 
     private int currentPreference;      // Current queue
     private int firstPreference;        // First chosen queue
-    private int companyID;
-    private int studentID;
-    private double timeRemaining;
+    private String companyID;
+    private String studentID;
+    private int timeRemaining;
 
-    public QueuePosition(int firstPreference, int companyID, int studentID) {
+    public QueuePosition(int firstPreference, String companyID, String studentID) {
         this.currentPreference = firstPreference;
         this.firstPreference = firstPreference;
         this.companyID = companyID;
@@ -55,31 +55,31 @@ public class QueuePosition {
 
     }
 
-    public int getCompanyID() {
+    public String getCompanyID() {
         return companyID;
     }
 
-    public void setCompanyID(int companyID) {
+    public void setCompanyID(String companyID) {
         this.companyID = companyID;
     }
 
-    public int getStudentID() {
+    public String getStudentID() {
         return studentID;
     }
 
-    public void setStudentID(int studentID) {
+    public void setStudentID(String studentID) {
         this.studentID = studentID;
     }
 
-    public double getTimeRemaining() {
+    public int getTimeRemaining() {
         return timeRemaining;
     }
 
-    public void setTimeRemaining(double timeRemaining) {
+    public void setTimeRemaining(int timeRemaining) {
         this.timeRemaining = timeRemaining;
     }
 
-    public Company getCompany(int id) {
+    public Company getCompany(String id) {
        // return new Company(id);
 
         return c.get(id);
@@ -92,7 +92,7 @@ public class QueuePosition {
 //        return null;
     }
 
-    public Student getStudent(int ID){
+    public Student getStudent(String ID){
 
         return s.get(ID);
 

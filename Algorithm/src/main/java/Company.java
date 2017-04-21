@@ -3,11 +3,11 @@
  */
 public class Company {
 
-    private int companyID;
+    private String companyID;
     private CompanyQueue companyQueue;
     int numRecruiters = 3;
 
-    public Company(int companyID) {
+    public Company(String companyID) {
         this.companyID = companyID;
         this.companyQueue = new CompanyQueue(numRecruiters);
     }
@@ -20,11 +20,11 @@ public class Company {
         this.companyQueue = companyQueue;
     }
 
-    public int getCompanyID() {
+    public String getCompanyID() {
         return companyID;
     }
 
-    public void setCompanyID(int companyID) {
+    public void setCompanyID(String companyID) {
         companyID = companyID;
     }
 
@@ -32,7 +32,7 @@ public class Company {
         return companyQueue.dequeueQueuePosition();
     }
 
-    public boolean update(int studentID) {
+    public boolean update(String studentID) {
         Student s = Student.getStudent(studentID);
 
         int qpToRemove = 0;

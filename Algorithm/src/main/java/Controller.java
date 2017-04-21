@@ -18,20 +18,20 @@ public class Controller {
 
         Driver driver = new Driver();
         Scanner scan = new Scanner(System.in);
-        driver.companies = new Hashtable<Integer, Company>();
+        driver.companies = new Hashtable<String, Company>();
 
         System.out.println("Enter number of comapnies");
         int num_companies = scan.nextInt();
         for (int i = 0; i < num_companies; i++) {
-            driver.companies.put(1000+i, new Company(1000+i));
+            driver.companies.put(""+(1000+i), new Company(""+(1000+i)));
         }
         System.out.println("Enter number of students");
         int num_students = scan.nextInt();
         System.out.println("Enter students");
 
-        driver.students = new Hashtable<Integer, Student>();
+        driver.students = new Hashtable<String, Student>();
         for (int i = 0; i < num_students; i++) {
-            driver.students.put(100+i, new Student(100 + i, "", "", "", null, i, ""));
+            driver.students.put(""+(100+i), new Student(""+(100 + i), "", "", "", null, i, ""));
         }
         QueuePosition.setc(driver.companies);
         QueuePosition.sets(driver.students);
@@ -39,12 +39,12 @@ public class Controller {
         Student.sets(driver.students);
 
         int l = 0;
-        Set<Integer> keys = driver.students.keySet();
-        for (Integer i: keys) {
+        Set<String> keys = driver.students.keySet();
+        for (String i: keys) {
             Student s = driver.students.get(i);
             Company com[] = new Company[5];
             for (int j = 0; j < 5; j++) {
-                com[j] = driver.companies.get(1000 + ((l+j) % driver.companies.size()));
+                com[j] = driver.companies.get(""+(1000 + ((l+j) % driver.companies.size())));
             }
             l++;
             s.createPrefernces(com);

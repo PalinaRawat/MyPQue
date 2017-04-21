@@ -10,9 +10,9 @@ public class CompanyQueue {
     private int timePerStudent = 1;
     private ArrayList<QueuePosition> currentlySpeaking;
     private Queue<QueuePosition>[] queues;
-    private int[] numDummiesInQueue;
+    private int[] numDummiesInQueue;        // Number of dummies in each priority queue
     private int numberOfQueues = 5;
-    private int numOfAllowedDummies = 5;
+    private int numOfAllowedDummies = 5;    // Number of optimized students allowed
 
     public CompanyQueue(int numRecruiters) {
         currentlySpeaking = new ArrayList<QueuePosition>();
@@ -72,7 +72,7 @@ public class CompanyQueue {
     }
 
     public boolean insertInCompany(QueuePosition position) {
-        position.setTimeRemaining(queues[position.getCurrentPreference()].size()*timePerStudent);
+        position.setTimeRemaining(timeRemaing(position));
         queues[position.getCurrentPreference()].add(position);
         return true;
     }
@@ -133,7 +133,7 @@ public class CompanyQueue {
     }
 
 
-    public void displayCompanyQueue(int companyID){
+    public void displayCompanyQueue(String companyID){
 
         System.out.println("Company # " + companyID);
         System.out.print("Current :\t");

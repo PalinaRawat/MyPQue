@@ -13,18 +13,18 @@ enum Standings {
 
 public class Student {
 
-    static Hashtable<Integer, Student> s;
-    static Hashtable<Integer, Company> c;
+    static Hashtable<String, Student> s;
+    static Hashtable<String, Company> c;
 
-    public static void sets(Hashtable<Integer, Student> stud) {
+    public static void sets(Hashtable<String, Student> stud) {
         s = stud;
     }
-    public static void setc(Hashtable<Integer, Company> comp) {
+    public static void setc(Hashtable<String, Company> comp) {
         c = comp;
     }
 
     // Student ID
-    private int ID;
+    private String ID;
 
     // Profile Stuff
     private String firstName;
@@ -41,7 +41,7 @@ public class Student {
     double thresholdTime = 1;
 
 
-    public Student(int ID, String firstName, String lastName, String major, Standings standing, int gradYear, String resumeLink) {
+    public Student(String ID, String firstName, String lastName, String major, Standings standing, int gradYear, String resumeLink) {
         this.ID = ID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -53,11 +53,11 @@ public class Student {
         this.queuePositions = new QueuePosition[numPreferences];
     }
 
-    public int getID() {
+    public String getID() {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
 
@@ -126,7 +126,7 @@ public class Student {
     }
 
 
-    public static Company getCompany(int id) {
+    public static Company getCompany(String id) {
         // return new Company(id);
 
         return c.get(id);
@@ -139,7 +139,7 @@ public class Student {
 //        return null;
     }
 
-    public static Student getStudent(int ID){
+    public static Student getStudent(String ID){
 
         return s.get(ID);
 
@@ -231,7 +231,7 @@ public class Student {
         for (int i = 1; i < numPreferences; i++) {
             if (queuePositions[i] != null) {
                 Company temp = getCompany(queuePositions[i].getCompanyID());
-                double timeInTempQ0 = temp.getCompanyQueue().getQueues()[0].size()*temp.getCompanyQueue().getTimePerStudent();
+                int timeInTempQ0 = temp.getCompanyQueue().getQueues()[0].size()*temp.getCompanyQueue().getTimePerStudent();
                 if (scheduledWaitTime >= timeInTempQ0) {
                     opt = queuePositions[i];
                     break;

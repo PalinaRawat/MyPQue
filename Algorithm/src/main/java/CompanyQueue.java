@@ -72,7 +72,7 @@ public class CompanyQueue {
     }
 
     public boolean insertInCompany(QueuePosition position) {
-        position.setTimeRemaining(timeRemaing(position));
+        position.setTimeRemaining(queues[position.getCurrentPreference()].size()*timePerStudent);
         queues[position.getCurrentPreference()].add(position);
         return true;
     }
@@ -99,15 +99,15 @@ public class CompanyQueue {
     }
 
     private int indexOf(QueuePosition position) {
-        int i = 0;
+        int i = -1;
         for (QueuePosition p: queues[position.getCurrentPreference()]) {
-            if (p == position) {
+            if (p.getStudentID() == position.getStudentID()) {
                 return i;
             } else {
                 i++;
             }
         }
-        return -1;
+        return i;
     }
 
     public boolean dequeueQueuePosition() {

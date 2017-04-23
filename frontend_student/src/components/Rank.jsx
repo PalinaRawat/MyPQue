@@ -41,16 +41,21 @@ export default class Rank extends Component {
     for(let i = 0; i<this.state.rank.length; i++) {
       if(arr[i] == null)
         continue;
-      if(newArr[arr[i]] != null) {
+      if(newArr[arr[i]-1] != null) {
         //throw error
+        console.log('error');
+        return;
       }
       else
-        newArr[arr[i]] = this.props.companies[i]._id;
+        newArr[arr[i]-1] = this.props.companies[i]._id;
     }
 
     for(let i = 0; i<newArr.length; i++) {
-      if(newArr[i] == null)
+      if(newArr[i] == null) {
+        console.log('err');
+        return;
         //throw error
+      }
       str = str+newArr[i] + ",";   
     }
     str = str.substring(0, str.length - 1);
@@ -64,8 +69,9 @@ export default class Rank extends Component {
       console.log(response);
     })
     .catch((err) => {
-      //someone make a dialog box that displays the error if there is an error
+      //throw error
       console.log(err);
+      return;
     })
   }
   render() {

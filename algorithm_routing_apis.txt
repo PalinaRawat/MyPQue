@@ -125,24 +125,22 @@ Parameters:
 
 Return: true or false depending on whether or not the student’s positions have been successfully updated.
 
+4) /server/createcompany
 
+Parameters:
+	company - company id in string format
+	time - time per student in Integer format
 
+	example:
+		POST /server/createcompany HTTP/1.1
+		Host: localhost:9998
+		Content-Type: application/x-www-form-urlencoded
+		Cache-Control: no-cache
+		Postman-Token: dee378d8-cecc-7819-ebe4-9f5270079beb
 
+		company=1100&time=5
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Return: true/false depending on whether the company has been successfully created and added to the company list or not.
 
 
 

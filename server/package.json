@@ -11,6 +11,10 @@
     "express-session": "^1.15.1",
     "mongoose": "^4.8.2",
     "passport": "^0.3.2",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "request": "^2.81.0"
+  },
+  "scripts": {
+    "start": "node app.js && java -jar ../Algorithm/out/artifacts/MyPQue_jar/MyPQue.jar"
   }
 }

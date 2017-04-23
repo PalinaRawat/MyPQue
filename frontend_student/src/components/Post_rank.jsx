@@ -9,29 +9,15 @@ class Post_rank extends Component {
 	constructor(props) {
     super(props);
     this.state = {
-    	ranked:[],
-    	value: 2
+    	value: null
     };
-    this.state.ranked.push({Name: this.props.Name, value: this.state.value});
   }
 
   handleChange = (event, index, value) => {
-  	this.setState({value});
-  	//this.state.ranked.push({Name: this.props.Name, value: this.state.value});
-
-  	//this.state.ranked[this.props.Name].value = this.state.value;
-
-  	const rankes = this.state.ranked.slice();
-
-  	for (var i = 0, l = rankes.length; i < l; i++) {
-    	if (rankes[i].Name === this.props.Name) {
-        	rankes[i].value = value;
-        	break;
-    	}
-	}
-	this.setState({ranked: rankes});
-	console.log(rankes);
+  	this.setState({value: value});
+	this.props.changeRank(this.props.index, value);
   }
+
 
   //in handle change we will push info about company name and rank
   //store it in global variable, 

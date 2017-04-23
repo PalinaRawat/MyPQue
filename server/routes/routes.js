@@ -1,7 +1,9 @@
 'use strict'
 
 const User = require('../models/User');
-const path = require('path')
+const Config = require('../config/Config');
+const path = require('path');
+var request = require('request');
 
 module.exports = (app, passport) => {
 
@@ -100,6 +102,13 @@ module.exports = (app, passport) => {
 					res.send(err);
 				res.redirect('/recmain')
 			});
+
+			//post the information to the java service
+			const route = '/createcompany';
+			requst.post(Config.algorithim+route).form({
+				comp: user._id,
+				time: user.profile.timePer
+			});
 		});
 	});
 
@@ -147,8 +156,7 @@ module.exports = (app, passport) => {
 		});
 	});
 
-	app.get('/Students', (req, res) => {
-		console.log('students route');
+	app.get('/Students', hasCompanyProfile, (req, res) => {
 		//gets the list of students
 		User.find({'Recruiter.isRec': false}, (err, students) => {
 			if(err)
@@ -165,9 +173,39 @@ module.exports = (app, passport) => {
 			res.send(newArr);
 		});
 	});
+
 	app.get('/logout', (req, res) => {
 		req.logout();
 		res.redirect('/');
+	});
+
+	//post the students preferences
+	app.post('/studentPreferences', isStudent, (req, res) => {
+		User.findOne({'local.email': req.user.local.email}, (err, user) => {
+			var id = user._id;
+			var companies = req.body.companies;
+
+			const route = '/create';
+			requst.post(Config.algorithim+route).form({
+				student: user._id,
+				companies: companies
+			});
+			res.sendStatus(200);
+		});
+		res.sendStatus(500);
+	});
+	app.get('/companyQueue', (req, res) => {
+		const route = '/getqueue';
+		request(Config.algorithim+route, (err, algoResponse, body) => {
+			if(err) {
+				res.send(err);
+			}
+			if(algoResponse) {
+				console.log('res is '+algoResponse);
+			}
+			console.log('body is '+body);
+			res.send(body);
+		});
 	});
 
 	function isLoggedIn(req, res, next) {

@@ -4,7 +4,7 @@ To install the depencies and run the node server first make sure you have the up
 
 ```bash
 $ npm install
-$ node app.js
+$ npm start
 ```
 
 You can access the index route at localhost:3000

@@ -494,8 +494,23 @@ export default class Companies extends Component {
        // console.log(company);
         this.setState({selected: arr});
       }
+    }); 
+  }
+
+  filterSelected() {
+    let arr = [];
+    this.state.selected.forEach((company, index) => {
+      if(!this.contains(arr, company))
+        arr.push(company);
     });
-    
+    return arr;
+  }
+  contains(arr, company) {
+    for(let i = 0; i<arr.length; i++) {
+      if(arr[i] === company)
+        return true;
+    }
+    return false;
   }
 
   handleOpen() {
@@ -510,7 +525,7 @@ export default class Companies extends Component {
     if(!this.state.hasSelected)
       div =<FilterableProductTable products={this.state.companies} togglePage={this.togglePage} onClick={this.onClick}/>
     else 
-      div = <Rank companies={this.state.selected}/>
+      div = <Rank companies={this.filterSelected()}/>
 
     const actions = [
       <FlatButton

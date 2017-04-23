@@ -120,6 +120,23 @@ public class Driver {
         return true;
     }
 
+
+    /**
+     * @param ID = companyID (Ex. 123D34)
+     *        time = time per student
+     * */
+    @POST
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Path("/createcompany")
+    public boolean createCompnay(@FormParam("comp") String ID, @FormParam("time") int time) {
+        Company c = new Company(ID);
+        c.getCompanyQueue().setTimePerStudent(time);
+        companies.put(ID, c);
+        QueuePosition.setc(companies);
+        Student.setc(companies);
+        return true;
+    }
+
     /*public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         companies = new ArrayList<Company>();

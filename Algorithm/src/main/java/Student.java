@@ -38,7 +38,7 @@ public class Student {
     // Positions
     private QueuePosition queuePositions[];
     int numPreferences = 5;
-    double thresholdTime = 1;
+    double thresholdTime = 5;
 
 
     public Student(String ID, String firstName, String lastName, String major, Standings standing, int gradYear, String resumeLink) {
@@ -159,7 +159,7 @@ public class Student {
         initQueuePositions(preferredCompanies);
         insertInCompanies(this.queuePositions, preferredCompanies);
 
-
+        optimize();
         return true;
     }
 

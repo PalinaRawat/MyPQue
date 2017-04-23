@@ -38,6 +38,7 @@ public class Driver {
         Student s2 = new Student(string_id, "", "", "", null, Integer.parseInt(string_id), "");
         students.put(string_id, s2);
         Student.sets(students);
+        QueuePosition.sets(students);
         Company com[] = new Company[arr.length];
         for (int j = 0; j < arr.length; j++) {
             com[j] = companies.get(arr[j]);
@@ -57,7 +58,7 @@ public class Driver {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/gettime")
-    public QueuePosition[] getOreferences(@QueryParam(value = "stud") String id) {
+    public QueuePosition[] getOreferences(@QueryParam(value = "student") String id) {
         return students.get(id).getQueuePositions();
     }
 
@@ -65,7 +66,7 @@ public class Driver {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/getqueue")
-    public QueuePosition[] getCompanyQueueOne(@QueryParam(value = "comp") String ID) {
+    public QueuePosition[] getCompanyQueueOne(@QueryParam(value = "company") String ID) {
         CompanyQueue cq = companies.get(ID).getCompanyQueue();
         cq.displayCompanyQueue(ID);
         Queue<QueuePosition> qp =  cq.getQueues()[0];
@@ -83,7 +84,7 @@ public class Driver {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/getspeaking")
-    public QueuePosition[] getCompanySpeakingQueue(@QueryParam(value = "comp") String ID) {
+    public QueuePosition[] getCompanySpeakingQueue(@QueryParam(value = "company") String ID) {
         CompanyQueue cq = companies.get(ID).getCompanyQueue();
         ArrayList<QueuePosition> qp = cq.getCurrentlySpeaking();
         QueuePosition[] newqp = new QueuePosition[qp.size()];
@@ -98,7 +99,7 @@ public class Driver {
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Path("/dequeue")
-    public boolean dequeueFromCompany(@FormParam("comp") String ID) {
+    public boolean dequeueFromCompany(@FormParam("company") String ID) {
         Company c = companies.get(ID);
         c.displayCompany();
         c.dequeue();
@@ -109,7 +110,7 @@ public class Driver {
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Path("/update")
-    public boolean updateFromCompany(@FormParam("comp") String ID, @FormParam("stud") String studID) {
+    public boolean updateFromCompany(@FormParam("company") String ID, @FormParam("student") String studID) {
         Company c = companies.get(ID);
         Student s = students.get(studID);
         c.displayCompany();
@@ -117,6 +118,23 @@ public class Driver {
         c.update(studID);
         c.displayCompany();
         s.displayProfile();
+        return true;
+    }
+
+
+    /**
+     * @param ID = companyID (Ex. 123D34)
+     *        time = time per student
+     * */
+    @POST
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Path("/createcompany")
+    public boolean createCompnay(@FormParam("company") String ID, @FormParam("time") int time) {
+        Company c = new Company(ID);
+        c.getCompanyQueue().setTimePerStudent(time);
+        companies.put(ID, c);
+        QueuePosition.setc(companies);
+        Student.setc(companies);
         return true;
     }
 

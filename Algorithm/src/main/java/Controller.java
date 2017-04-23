@@ -16,7 +16,7 @@ public class Controller {
 
     public static void main(String[] args) {
 
-        Driver driver = new Driver();
+      /*  Driver driver = new Driver();
         Scanner scan = new Scanner(System.in);
         driver.companies = new Hashtable<String, Company>();
 
@@ -25,18 +25,18 @@ public class Controller {
         for (int i = 0; i < num_companies; i++) {
             driver.companies.put(""+(1000+i), new Company(""+(1000+i)));
         }
-        System.out.println("Enter number of students");
+       /* System.out.println("Enter number of students");
         int num_students = scan.nextInt();
         System.out.println("Enter students");
 
         driver.students = new Hashtable<String, Student>();
-        for (int i = 0; i < num_students; i++) {
+       /* for (int i = 0; i < num_students; i++) {
             driver.students.put(""+(100+i), new Student(""+(100 + i), "", "", "", null, i, ""));
         }
         QueuePosition.setc(driver.companies);
-        QueuePosition.sets(driver.students);
+       // QueuePosition.sets(driver.students);
         Student.setc(driver.companies);
-        Student.sets(driver.students);
+       // Student.sets(driver.students);
 
         int l = 0;
         Set<String> keys = driver.students.keySet();
@@ -49,6 +49,7 @@ public class Controller {
             l++;
             s.createPrefernces(com);
         }
+*/
 
         try {
             ResourceConfig config = new ResourceConfig(Driver.class);

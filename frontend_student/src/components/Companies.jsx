@@ -390,6 +390,7 @@ var PRODUCTS = [
          computerScience: true,
          computerEngineering: true,
          electricalEngineering: true,
+         _id: "98r894982343"
 
       },
       {
@@ -404,7 +405,8 @@ var PRODUCTS = [
          Senior: false,
          computerScience: true,
          computerEngineering: false,
-         electricalEngineering: true
+         electricalEngineering: true,
+         _id: "r4r4oir43ht43"
 
       },
       {
@@ -419,7 +421,8 @@ var PRODUCTS = [
          Senior: false,
          computerScience: false,
          computerEngineering: true,
-         electricalEngineering: true
+         electricalEngineering: true,
+         _id: "48ior2hrife"
 
 
       },
@@ -476,7 +479,9 @@ export default class Companies extends Component {
 
   togglePage() {
     //toggle selected prefrence
-    if(this.state.selected.length < 1 || this.state.selected.length > 5) {
+    var arr = this.filterSelected();
+    this.setState({selected: arr});
+    if(arr < 1 || arr > 5) {
       this.handleOpen();
     }
     else {

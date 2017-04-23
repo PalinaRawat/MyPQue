@@ -19,6 +19,7 @@ export default class Rank extends Component {
     };
     console.log(this.props.companies);
     this.changeRank = this.changeRank.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
   
   changeRank(index, rank) {
@@ -35,14 +36,26 @@ export default class Rank extends Component {
   onSubmit() {
     //use axios to send post request to server
     let str = "{";
-    this.state.rank.forEach((company, index) => {
-      if(this.state.rank.length -1 == index) {
-        //if last element
-        str = str+company+"}";
+    const arr = this.state.rank;
+    const newArr = [];
+    for(let i = 0; i<this.state.rank.length; i++) {
+      if(arr[i] == null)
+        continue;
+      if(newArr[arr[i]] != null) {
+        //throw error
       }
       else
-        str = str+company+",";
-    });
+        newArr[arr[i]] = this.props.companies[i]._id;
+    }
+
+    for(let i = 0; i<newArr.length; i++) {
+      if(newArr[i] == null)
+        //throw error
+      str = str+newArr[i] + ",";   
+    }
+    str = str.substring(0, str.length - 1);
+    str = str + "}";
+
     console.log("str is "+str);
     axios.post('http://localhost:3000/studentPreferences', {
       companies: str
@@ -64,11 +77,8 @@ export default class Rank extends Component {
 
       );
     })
-
     return(
-
       <div>
-
          <div className="mui--text-center">Rank the companies</div>
         {mapped}
         <MuiThemeProvider>

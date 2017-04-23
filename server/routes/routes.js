@@ -132,7 +132,7 @@ module.exports = (app, passport) => {
 				
 				companyObject.FullTime = false;
         		companyObject.Internships = false;
-
+        		companyObject._id = company._id;
         		var lookingfor = company.profile.lookingFor;
         		for(var j = 0; j<lookingfor.length; j++) {
         			companyObject[lookingfor[j]] = true;

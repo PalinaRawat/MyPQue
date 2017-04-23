@@ -16,7 +16,7 @@ public class Controller {
 
     public static void main(String[] args) {
 
-        Driver driver = new Driver();
+        /*Driver driver = new Driver();
         Scanner scan = new Scanner(System.in);
         driver.companies = new Hashtable<String, Company>();
 
@@ -49,7 +49,7 @@ public class Controller {
             l++;
             s.createPrefernces(com);
         }
-
+*/
         try {
             ResourceConfig config = new ResourceConfig(Driver.class);
 

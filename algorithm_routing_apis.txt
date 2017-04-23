@@ -1,0 +1,149 @@
+GET Methods
+
+1) /server/gettime
+
+Parameters:
+	student - The student id in string format
+		ex - localhost:9998/server/gettime?student=101
+Return: an array of JSON object as follows
+[
+  {
+    "currentPreference": 0,
+    "firstPreference": 0,
+    "companyID": "1004",
+    "studentID": "101",
+    "timeRemaining": -1
+  },
+  {
+    "currentPreference": 1,
+    "firstPreference": 1,
+    "companyID": "1005",
+    "studentID": "101",
+    "timeRemaining": -1
+  }
+	…
+]
+
+2) /server/getqueue
+
+Parameters:
+	company - company id in string format
+		ex - localhost:9998/server/getqueue?comp=1002
+Return: an array of json objects representing the company queue as follows:
+[
+  {
+    "currentPreference": 0,
+    "firstPreference": 0,
+    "companyID": "1002",
+    "studentID": "139",
+    "timeRemaining": -1
+  },
+  {
+    "currentPreference": 0,
+    "firstPreference": 0,
+    "companyID": "1002",
+    "studentID": "102",
+    "timeRemaining": -1
+  }
+	…
+]
+
+3) server/getspeaking
+
+Parameters:
+	company - company id in string format
+		ex - localhost:9998/server/getspeaking?comp=1002
+Return: an array of json objects representing the students recruiters are currently speaking to in that company. will return an empty array if no one is currently talking to recruiters. Will return a non-empty array after /server/dequeue is called. Ex - after one dequeue, return is
+
+[
+  {
+    "currentPreference": 0,
+    "firstPreference": 0,
+    "companyID": "1002",
+    "studentID": "139",
+    "timeRemaining": -1
+  }
+]
+
+
+POST methods
+1) /server/create
+
+Parameters
+	student - student id in string format
+	companies - String representation of the array of student company preferences, where each entry is the company preference such that the ith entry is the ith preference of the student
+
+	example:
+		POST /server/create HTTP/1.1
+		Host: localhost:9998
+		Content-Type: application/x-www-form-urlencoded
+		Cache-Control: no-cache
+		Postman-Token: 288ccfe4-b4a6-2bb7-3f1b-1fb34a4f7bd7
+
+		student=100&companies=%7B1001%2C1002%2C1003%2C1004%2C1005%7D
+
+Here,
+student = 100,
+companies = {1001, 1002, 1003, 1004, 1005}
+
+Return: true or false depending on whether or not the student preferences have been successfully created
+
+2) /server/dequeue
+
+This method should be called by a recruiter when he/she wants to talk to a student, and thus wants to call him/her from their company queue
+
+Parameters:
+	company - company id in string format
+
+	example:
+		POST /server/dequeue HTTP/1.1
+		Host: localhost:9998
+		Content-Type: application/x-www-form-urlencoded
+		Cache-Control: no-cache
+		Postman-Token: 085f7366-f17b-47ff-a3ac-8b06f1e5a86e
+
+		company=1002
+
+Return: true/false depending on whether or not the student has been successfully dequeued from the company’s queue
+
+3) /server/update
+
+This method should be called after the recruiter is done talking to the student so as to update his/her positions in all other company queues
+
+Parameters:
+	company - company id in string format
+	student - student id in string format
+
+	example:
+		POST /server/update HTTP/1.1
+		Host: localhost:9998
+		Content-Type: application/x-www-form-urlencoded
+		Cache-Control: no-cache
+		Postman-Token: 3b2e089b-10b4-42c4-6144-32a30f32766e
+
+		comp=1002&stud=139
+
+Return: true or false depending on whether or not the student’s positions have been successfully updated.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

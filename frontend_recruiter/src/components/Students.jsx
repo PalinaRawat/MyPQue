@@ -69,7 +69,7 @@ componentDidMount() {
         //should display filtered
 				<Post key={i} firstName={"First Name: " + tableItem.firstName}
           lastName={"Last Name: " + tableItem.lastName}
-          link={("Resume: " + tableItem.link).link("hello")}  />
+          link={("Resume: " + tableItem.link)}  />
 
 			);
 		})

@@ -161,7 +161,7 @@ module.exports = (app, passport) => {
 
 	app.get('/Students', hasCompanyProfile, (req, res) => {
 		//gets the list of students
-		User.find({'Recruiter.isRec': false}, (err, students) => {
+		User.find({'Recruiter.isRec': true}, (err, students) => {
 			if(err)
 				res.send(err);
 			var newArr = [];
@@ -227,8 +227,10 @@ module.exports = (app, passport) => {
 				User.findById(_id, (err, user) => {
 					company.Name = user.Recruiter.companyName;
 					newArr.push(company);
-					if(i == body.length-1)
+					if(i == body.length-1) {
+						console.log(newArr);
 						res.send(newArr);
+					}
 				});
 			}
 		})

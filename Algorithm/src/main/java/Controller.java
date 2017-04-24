@@ -50,6 +50,8 @@ public class Controller {
             s.createPrefernces(com);
         }
 */
+        Driver.students = new Hashtable<String, Student>();
+        Driver.companies = new Hashtable<String, Company>();
 
         try {
             ResourceConfig config = new ResourceConfig(Driver.class);

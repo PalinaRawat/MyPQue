@@ -28,7 +28,7 @@ Return: an array of JSON object as follows
 
 Parameters:
 	company - company id in string format
-		ex - localhost:9998/server/getqueue?comp=1002
+		ex - localhost:9998/server/getqueue?company=1002
 Return: an array of json objects representing the company queue as follows:
 [
   {
@@ -52,7 +52,7 @@ Return: an array of json objects representing the company queue as follows:
 
 Parameters:
 	company - company id in string format
-		ex - localhost:9998/server/getspeaking?comp=1002
+		ex - localhost:9998/server/getspeaking?company=1002
 Return: an array of json objects representing the students recruiters are currently speaking to in that company. will return an empty array if no one is currently talking to recruiters. Will return a non-empty array after /server/dequeue is called. Ex - after one dequeue, return is
 
 [
@@ -121,11 +121,12 @@ Parameters:
 		Cache-Control: no-cache
 		Postman-Token: 3b2e089b-10b4-42c4-6144-32a30f32766e
 
-		comp=1002&stud=139
+		company=1002&student=139
 
 Return: true or false depending on whether or not the student’s positions have been successfully updated.
 
-4) /server/createcompany
+4) /server/create
+any
 
 Parameters:
 	company - company id in string format

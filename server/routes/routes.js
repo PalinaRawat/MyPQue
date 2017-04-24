@@ -4,7 +4,8 @@ const User = require('../models/User');
 const Config = require('../config/Config');
 const path = require('path');
 var request = require('request');
-
+var axios = require('axios');
+var mongoose = require('mongoose');
 module.exports = (app, passport) => {
 
 	app.get('/', (req, res) => {
@@ -105,9 +106,11 @@ module.exports = (app, passport) => {
 
 			//post the information to the java service
 			const route = '/createcompany';
-			requst.post(Config.algorithim+route).form({
-				comp: user._id,
-				time: user.profile.timePer
+			var id = user._id+"";
+			console.log(user.profile.timePer);
+			request.post(Config.algorithm+route).form({
+				time: user.profile.timePer,
+				company: id
 			});
 		});
 	});
@@ -185,17 +188,16 @@ module.exports = (app, passport) => {
 			var id = user._id;
 			var companies = req.body.companies;
 			const route = '/create';
-			requst.post(Config.algorithim+route).form({
-				student: user._id,
+			id = id +"";
+			request.post(Config.algorithm+route).form({
+				student: id,
 				companies: companies
 			});
-			res.sendStatus(200);
 		});
-		res.sendStatus(500);
 	});
 	app.get('/companyQueue', (req, res) => {
 		const route = '/getqueue';
-		request(Config.algorithim+route, (err, algoResponse, body) => {
+		request(Config.algorithm+route, (err, algoResponse, body) => {
 			if(err) {
 				res.send(err);
 			}
@@ -205,26 +207,36 @@ module.exports = (app, passport) => {
 			console.log('body is '+body);
 			res.send(body);
 		});
-		res.sendStatus(500);
+		// res.sendStatus(500);
 	});
 
 	app.get('/gettime', (req, res) => {
 		const route = '/gettime';
-		request(Config.algorithim+route, (err, algoResponse, body) => {
+		console.log("student id is "+req.user._id);
+		axios.get(Config.algorithm+route+'?student='+req.user._id).then((response) => {
+			let body = response.data;
+			var newArr = [];
+			for(let i = 0; i<body.length; i++) {
+				let company = new Object();
+				company.companyID = body[i].companyID
+				company.timeRemaining = body[i].timeRemaining;
+
+				const companyID = body[i].companyID;
+				var _id = mongoose.mongo.ObjectId(companyID);
+
+				User.findById(_id, (err, user) => {
+					company.Name = user.Recruiter.companyName;
+					newArr.push(company);
+					if(i == body.length-1)
+						res.send(newArr);
+				});
+			}
+		})
+		.catch((err) => {
 			if(err)
 				res.send(err);
-			if(algoResponse)
-				console.log('res is '+algoResponse);
-			console.log(body);
-			const companyID = body.companyID;;
-
-			User.findById(companyID, (err, user) => {
-				body.Name = user.Recruiter.companyName;
-				res.send(body);
-			});
-			res.sendStatus(500);
 		});
-		res.sendStatus(500);
+		// res.sendStatus(500);
 	});
 	function isLoggedIn(req, res, next) {
 		if(req.isAuthenticated())

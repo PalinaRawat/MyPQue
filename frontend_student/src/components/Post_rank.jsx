@@ -25,8 +25,6 @@ class Post_rank extends Component {
   //when you click submit go through array and check if there is match 
 	
      render() {
-    
-	
 		return(
 			<div className="Post">
 					<div className="Tab">

@@ -50,14 +50,8 @@ public class Driver {
         for (int j = 0; j < arr.length; j++) {
             com[j] = companies.get(arr[j]);
             if (debug_run)
-                System.out.println(com[j]);
+                com[j].displayCompany();
         }
-
-        /**
-         * @TODO: companies.get(i) or even companies.containsKey(1) gives error values for some wierd reason O_o Resolve this
-         *
-         * method throws a nullpointerexception as a result.
-         */
 
         return s2.createPrefernces(com);
     }

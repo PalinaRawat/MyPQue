@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Post from './Post';
-
-
+import axios from 'axios';
 
 const styles = {
   block: {
@@ -43,6 +42,22 @@ export default class Profile extends Component {
 	constructor(props) {
     super(props);
     this.state = {value: 1};
+  }
+
+componentDidMount() {
+    axios.get('http://localhost:3000/Students')
+    .then(res => {
+     // console.log(res.data);
+      var Students = res.data; 
+     // console.log(companies);
+      this.setState({Students});
+    })
+    .catch((error) => {
+      //error getting data from server load products array for dev purposes
+      var Students = data;
+      this.setState({Students});
+    });
+
   }
 
   handleChange = (event, index, value) => this.setState({value});

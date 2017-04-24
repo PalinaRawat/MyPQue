@@ -184,7 +184,6 @@ module.exports = (app, passport) => {
 		User.findOne({'local.email': req.user.local.email}, (err, user) => {
 			var id = user._id;
 			var companies = req.body.companies;
-
 			const route = '/create';
 			requst.post(Config.algorithim+route).form({
 				student: user._id,
@@ -206,8 +205,27 @@ module.exports = (app, passport) => {
 			console.log('body is '+body);
 			res.send(body);
 		});
+		res.sendStatus(500);
 	});
 
+	app.get('/gettime', (req, res) => {
+		const route = '/gettime';
+		request(Config.algorithim+route, (err, algoResponse, body) => {
+			if(err)
+				res.send(err);
+			if(algoResponse)
+				console.log('res is '+algoResponse);
+			console.log(body);
+			const companyID = body.companyID;;
+
+			User.findById(companyID, (err, user) => {
+				body.Name = user.Recruiter.companyName;
+				res.send(body);
+			});
+			res.sendStatus(500);
+		});
+		res.sendStatus(500);
+	});
 	function isLoggedIn(req, res, next) {
 		if(req.isAuthenticated())
 			return next();

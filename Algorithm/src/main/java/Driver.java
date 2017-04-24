@@ -35,7 +35,7 @@ public class Driver {
         String[] arr = comps.split(",");
 
 
-        Student s2 = new Student(string_id, "", "", "", null, Integer.parseInt(string_id), "");
+        Student s2 = new Student(string_id, "", "", "", null, 0, "");
         students.put(string_id, s2);
         Student.sets(students);
         QueuePosition.sets(students);

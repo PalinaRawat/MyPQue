@@ -178,6 +178,8 @@ public class Student {
     public boolean insertInCompanies(QueuePosition positions[], Company preferredCompanies[]) {
 
         for (int i = 0; i < positions.length; i++) {
+            /*if(preferredCompanies[i] == null)
+                    break;*/
             preferredCompanies[i].getCompanyQueue().insertInCompany(positions[i]);
         }
         return true;

@@ -130,8 +130,13 @@ public class Driver {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Path("/createcompany")
     public boolean createCompnay(@FormParam("company") String ID, @FormParam("time") int time) {
+        boolean debug = true;
+        if (debug)
+            System.out.println("id = " + ID + "\t time = " + time);
         Company c = new Company(ID);
         c.getCompanyQueue().setTimePerStudent(time);
+        if(debug)
+            System.out.println("is company created null = " + c==null);
         companies.put(ID, c);
         QueuePosition.setc(companies);
         Student.setc(companies);

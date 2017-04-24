@@ -10,6 +10,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import App from './components/App';
 import Profile from './components/Profile';
 import Companies from './components/Companies';
+import Schedule from './components/Schedule';
 import './css/index.css';
 
 
@@ -32,6 +33,7 @@ ReactDOM.render((
         <Route exact path="/" component={Profile} />
         <Route path="/Profile" component={Profile} />
         <Route path="/Companies" component={Companies} />
+        <Route path="/Schedule" component={Schedule} />
     
       </App>
 

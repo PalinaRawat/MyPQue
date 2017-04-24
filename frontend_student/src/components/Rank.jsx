@@ -1,10 +1,14 @@
 
 import React, { Component } from 'react';
+import { Redirect } from 'react-router'
 import axios from 'axios';
 import Post_rank from './Post_rank';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router-dom';
+import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog';
+
 
 
 export default class Rank extends Component {
@@ -15,11 +19,22 @@ export default class Rank extends Component {
   constructor(props) {
     super(props);
     this.state ={
-      rank: []
+      rank: [],
+      open: false,
+      result: false
     };
     console.log(this.props.companies);
     this.changeRank = this.changeRank.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.handleOpen = this.handleOpen.bind(this);
+  }
+
+  handleOpen() {
+    this.setState({open: true});
+  }
+  handleClose() {
+    this.setState({open: false});
   }
   
   changeRank(index, rank) {
@@ -42,9 +57,10 @@ export default class Rank extends Component {
       if(arr[i] == null)
         continue;
       if(newArr[arr[i]-1] != null) {
-        //throw error
-        console.log('error');
+        this.handleOpen();
+        console.log('err');
         return;
+        this.handleOpen();
       }
       else
         newArr[arr[i]-1] = this.props.companies[i]._id;
@@ -54,7 +70,7 @@ export default class Rank extends Component {
       if(newArr[i] == null) {
         console.log('err');
         return;
-        //throw error
+        this.handleOpen();
       }
       str = str+newArr[i] + ",";   
     }
@@ -66,10 +82,11 @@ export default class Rank extends Component {
       companies: str
     })
     .then((response) => {
+      this.setState({result: true});
       console.log(response);
     })
     .catch((err) => {
-      //throw error
+      this.handleOpen();
       console.log(err);
       return;
     })
@@ -83,17 +100,39 @@ export default class Rank extends Component {
 
       );
     })
-    return(
+    const {result} = this.state
+    if (result) {
+            return <Redirect to="Schedule" />
+        }
+
+
+
+ const actions = [
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onTouchTap={this.handleClose}
+      />,
+    ]
+    return (
       <div>
+        <MuiThemeProvider>
+          <Dialog
+            title="Uncorrect order of ranking"
+            actions={actions}
+            modal={false}
+            open={this.state.open}
+            onRequestClose={this.handleClose}
+          >
+        Two companies can't have same preference. 
+        </Dialog>
+        </MuiThemeProvider>
          <div className="mui--text-center">Rank the companies</div>
         {mapped}
         <MuiThemeProvider>
-          <RaisedButton label="Submit" primary={true} onClick={this.onSubmit}/>
+          <RaisedButton label="Submit" primary={true} onClick={this.onSubmit} />
         </MuiThemeProvider> 
       </div>
-
-
     );
   }
 }
-

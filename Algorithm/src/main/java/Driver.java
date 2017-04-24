@@ -14,6 +14,8 @@ public class Driver {
 
     static Hashtable<String, Company> companies;
     static Hashtable<String, Student> students;
+    boolean debug = true;
+    boolean debug_run = true;
 
     //Student Methods
 
@@ -27,11 +29,16 @@ public class Driver {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Path("/create")
     public boolean create(@FormParam("student") String string_id, @FormParam("companies") String comps){
-        boolean debug = true;
-
-        comps = comps.substring(1,comps.length()-1);
+        //boolean debug = true;
         if (debug)
-            System.out.println(comps);
+            System.out.println("-- create called --");
+        comps = comps.substring(1,comps.length()-1);
+
+        if (debug_run) {
+            System.out.println("comapanies = " + comps);
+            System.out.println("student id = " + string_id);
+        }
+
         String[] arr = comps.split(",");
 
 
@@ -42,7 +49,7 @@ public class Driver {
         Company com[] = new Company[arr.length];
         for (int j = 0; j < arr.length; j++) {
             com[j] = companies.get(arr[j]);
-            if (debug)
+            if (debug_run)
                 System.out.println(com[j]);
         }
 
@@ -59,6 +66,11 @@ public class Driver {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/gettime")
     public QueuePosition[] getOreferences(@QueryParam(value = "student") String id) {
+        if (debug)
+            System.out.println("-- gettime called --");
+        if (debug_run)
+            System.out.println("student id = " + id);
+
         return students.get(id).getQueuePositions();
     }
 
@@ -67,6 +79,11 @@ public class Driver {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/getqueue")
     public QueuePosition[] getCompanyQueueOne(@QueryParam(value = "company") String ID) {
+        if (debug)
+            System.out.println("-- getqueue called --");
+        if (debug_run)
+            System.out.println("company id = " + ID);
+
         CompanyQueue cq = companies.get(ID).getCompanyQueue();
         cq.displayCompanyQueue(ID);
         Queue<QueuePosition> qp =  cq.getQueues()[0];
@@ -85,6 +102,12 @@ public class Driver {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/getspeaking")
     public QueuePosition[] getCompanySpeakingQueue(@QueryParam(value = "company") String ID) {
+        if (debug)
+            System.out.println("-- getspeaking called --");
+
+        if (debug_run)
+            System.out.println("company id = " + ID);
+
         CompanyQueue cq = companies.get(ID).getCompanyQueue();
         ArrayList<QueuePosition> qp = cq.getCurrentlySpeaking();
         QueuePosition[] newqp = new QueuePosition[qp.size()];
@@ -100,6 +123,11 @@ public class Driver {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Path("/dequeue")
     public boolean dequeueFromCompany(@FormParam("company") String ID) {
+        if (debug)
+            System.out.println("-- dequeue called --");
+
+        if (debug_run)
+            System.out.println("company id = " + ID);
         Company c = companies.get(ID);
         c.displayCompany();
         c.dequeue();
@@ -111,6 +139,12 @@ public class Driver {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Path("/update")
     public boolean updateFromCompany(@FormParam("company") String ID, @FormParam("student") String studID) {
+        if (debug)
+            System.out.println("-- update called --");
+        if (debug_run) {
+            System.out.println("company id = " + ID);
+            System.out.println("Student id = "+ studID);
+        }
         Company c = companies.get(ID);
         Student s = students.get(studID);
         c.displayCompany();
@@ -130,12 +164,13 @@ public class Driver {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Path("/createcompany")
     public boolean createCompnay(@FormParam("company") String ID, @FormParam("time") int time) {
-        boolean debug = true;
         if (debug)
+            System.out.println("-- createcompany called --");
+        if (debug_run)
             System.out.println("id = " + ID + "\t time = " + time);
         Company c = new Company(ID);
         c.getCompanyQueue().setTimePerStudent(time);
-        if(debug)
+        if(debug_run)
             System.out.println("is company created null = " + c==null);
         companies.put(ID, c);
         QueuePosition.setc(companies);
